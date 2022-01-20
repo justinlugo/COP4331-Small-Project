@@ -1,0 +1,23 @@
+h1 {
+	text-align: center;
+	font-size: 2.5em;
+	font-family: sans-serif;
+}
+
+form {
+	text-align: center;
+	font-size: 1em;
+	font-family: sans-serif;
+}
+
+input {
+	margin: 5px;
+}
+
+#loginButton {
+	border-radius: 5px;
+}
+
+#loginButton:hover {
+	background-color: #1E90FF;
+}
