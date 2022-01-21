@@ -14,10 +14,10 @@ input {
 	margin: 5px;
 }
 
-#loginButton {
+.buttons {
 	border-radius: 5px;
 }
 
-#loginButton:hover {
+.buttons:hover {
 	background-color: #1E90FF;
 }
