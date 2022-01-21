@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>COP 4331 Small Project</title>
-	<meta charset="UTF-8">
-	<!--
-	<script type="text/javascript" src="js/code.js">
-	<script type="text/javascript" src="js/md5.js">
-	-->
-	<link rel="stylesheet" href="css/styles.css">
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-</head>
-<body>
-	<h1>Small Project Title</h1>
-	<form method="post">
-		<div>Please log-in.</div><br>
-		<label for="username">Username:</label><br>
-		<input type="text" id="username" name="username"><br>
-		<label for="password">Password:</label><br>
-		<input type="text" id="password" name="password"><br><br>
-		<input type="submit" id="loginButton" class="buttons" onclick="doLogin();" value="Submit">
-	</form>
-</body>
+	<head>
+		<title>COP 4331 Small Project</title>
+		<meta charset="UTF-8">
+		<!--
+		<script type="text/javascript" src="js/code.js">
+		<script type="text/javascript" src="js/md5.js">
+		-->
+		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	</head>
+	<body>
+		<div id="layout">
+			<div id="main">
+				<div id="title">
+					<h1>COP4331</h1>
+					<!-- NOTE: Come up with a fancy subheading on what this project is about. -->
+					<span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis nemo a placeat temporibus non!</span>
+				</div>
+				<div id="menu">
+					<div id="options">
+						<button id="signup">New User</button>
+						<button id="existing">Existing User</button>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<!-- NOTE: Create some text explaining what this website is. -->
+				<span class="info">What's this?</span>
+				<a href="https://www.cs.ucf.edu/">UCF 2022</a>
+			</div>
+		</div>
+	</body>
+	<script type="module" src="js/menu.js"></script>
 </html>
