@@ -1,1 +1,0 @@
-// anything dealing with the contact app (table of contacts for each user)
