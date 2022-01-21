@@ -9,10 +9,10 @@
 
 	/* prevent the user from highlighting anything */
 	-webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; 	 /* Safari */
-    -moz-user-select: none; 	 /* Firefox */
-    -ms-user-select: none; 		 /* Edge */
-    user-select: none;
+	-webkit-user-select: none; 	 /* Safari */
+	-moz-user-select: none; 	 /* Firefox */
+	-ms-user-select: none; 		 /* Edge */
+	user-select: none;
 }
 
 body {
