@@ -1,23 +1,96 @@
-h1 {
+/* "*" is all elements under the a given css selector. With just "*", we are 
+   selecting ALL elements and giving it the following properties.
+*/
+* {
+	/* HTML tags have "hardcoded" margins and padding, I'm removing those for
+	   consistant styling throughout the page. */ 
+	margin: 0;
+	padding: 0;
+
+	/* prevent the user from highlighting anything */
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; 	 /* Safari */
+    -moz-user-select: none; 	 /* Firefox */
+    -ms-user-select: none; 		 /* Edge */
+    user-select: none;
+}
+
+body {
+	/* prevents scrollbar */
+	overflow: hidden;
+}
+
+#layout {
+	display: grid; 
+  	grid-auto-columns: 1fr; 
+  	grid-template-columns: 1fr 480px 1fr; 
+  	grid-template-rows: .9fr .1fr; 
+  	gap: 0px 0px; 
+  	grid-template-areas: 
+    	". main ."
+		". footer ."; 
+	height: 100vh;
+}
+
+/* max and min widths are important to keep it "mobile friendly" */
+#main { 
+	grid-area: main;
+	max-width: 480px;
+	min-width: 320px;
 	text-align: center;
-	font-size: 2.5em;
-	font-family: sans-serif;
 }
 
-form {
-	text-align: center;
-	font-size: 1em;
-	font-family: sans-serif;
+#main h1 {
+	font-size: 5.6em;
 }
 
-input {
-	margin: 5px;
+#main span {
+	font-size: 15px;
+	color: gray;
 }
 
-.buttons {
-	border-radius: 5px;
+#title {
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
-.buttons:hover {
+#menu {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#menu button {
+	height: 35px;
+	width: 320px;
+}
+
+#menu button:hover {
 	background-color: #1E90FF;
+}
+
+#menu form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	user-select: all !important;
+}
+
+#menu input {
+	height: 35px;
+	width: 320px;
+}
+
+#footer {
+	grid-area: footer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	justify-content: center;
+	color: gray;
+}
+
+#footer a {
+	font-size: .8em;
 }
