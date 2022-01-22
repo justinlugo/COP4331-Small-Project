@@ -108,7 +108,8 @@ menu.querySelector('#existing').addEventListener('click', () => {
 
         const inputUser = document.createElement('input');
         inputUser.setAttribute('type', 'text');
-        inputUser.setAttribute('name', 'username');
+        // Needed to change the name to login for proper API
+        inputUser.setAttribute('name', 'login');
         inputUser.setAttribute('placeholder', "Username");
 
         const inputPass = document.createElement('input');
@@ -147,6 +148,12 @@ document.addEventListener('click', (e) => {
         const form = menu.querySelector('#form-login').getElementsByTagName('form');
         const data = Object.fromEntries(new FormData(form[0]).entries());
         packaging.login(data);
+
+        // Test code for creating a span to show the login result, part of professor's code
+        const span = document.createElement('span');
+        span.setAttribute('id', 'loginResult');
+        menu.appendChild(span);
+        //
     }
 });
 
