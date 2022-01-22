@@ -1,6 +1,5 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
-
 const menu = document.getElementById('menu');
 
 // Signup button is clicked.
@@ -21,11 +20,23 @@ menu.querySelector('#signup').addEventListener('click', () => {
         const form = document.createElement('form');
         form.setAttribute('method', 'post');
 
-        // A field for the full name.
-        const inputName = document.createElement('input');
-        inputName.setAttribute('type', 'text');
-        inputName.setAttribute('name', 'fullname');
-        inputName.setAttribute('placeholder', "Full Name");
+        // // A field for the full name.
+        // const inputName = document.createElement('input');
+        // inputName.setAttribute('type', 'text');
+        // inputName.setAttribute('name', 'fullname');
+        // inputName.setAttribute('placeholder', "Full Name");
+
+        // A field for the first name.
+        const inputFirst = document.createElement('input');
+        inputFirst.setAttribute('type', 'text');
+        inputFirst.setAttribute('name', 'firstName');
+        inputFirst.setAttribute('placeholder', "First Name");
+
+        // A field for the last name.
+        const inputLast = document.createElement('input');
+        inputLast.setAttribute('type', 'text');
+        inputLast.setAttribute('name', 'lastName');
+        inputLast.setAttribute('placeholder', "Last Name");
 
         // Email
         const inputEmail = document.createElement('input');
@@ -36,7 +47,7 @@ menu.querySelector('#signup').addEventListener('click', () => {
         // Username
         const inputUser = document.createElement('input');
         inputUser.setAttribute('type', 'text');
-        inputUser.setAttribute('name', 'username');
+        inputUser.setAttribute('name', 'login');
         inputUser.setAttribute('placeholder', "Username");
 
         // Password
@@ -51,14 +62,16 @@ menu.querySelector('#signup').addEventListener('click', () => {
         // checkPass.setAttribute('name', 'checkpass');
         // checkPass.setAttribute('placeholder', "Retype Password")
 
-        // Phone
+        // Phonenumber
         const inputPhone = document.createElement('input');
         inputPhone.setAttribute('type', 'text');
         inputPhone.setAttribute('name', 'phone');
         inputPhone.setAttribute('placeholder', "Phone");
 
         // Now with all these elements created, we need to append them to the form.
-        form.appendChild(inputName);
+        // form.appendChild(inputName);
+        form.appendChild(inputFirst);
+        form.appendChild(inputLast);
         form.appendChild(inputUser);
         form.appendChild(inputPass);
         //form.appendChild(checkPass);
@@ -69,7 +82,7 @@ menu.querySelector('#signup').addEventListener('click', () => {
         const submitBtn = document.createElement('button');
         submitBtn.setAttribute('id', 'submit');
         submitBtn.textContent = "Submit";
-
+        
         // Append the form and button inside the wrapper div.
         wrapper.appendChild(form);
         wrapper.appendChild(submitBtn);
@@ -100,6 +113,7 @@ menu.querySelector('#existing').addEventListener('click', () => {
 
         const inputPass = document.createElement('input');
         inputPass.setAttribute('type', 'password');
+        inputPass.setAttribute('name', 'password');
         inputPass.setAttribute('placeholder', "Password");
 
         const loginBtn = document.createElement('button');
@@ -121,15 +135,18 @@ menu.querySelector('#existing').addEventListener('click', () => {
 // Submit button is clicked, in the signup form.
 document.addEventListener('click', (e) => {
     if (e.target.id == 'submit') {
-        // do the php magic here.
-        packaging.newUser();
+        const form = menu.querySelector('#form-signup').getElementsByTagName('form');
+        const data = Object.fromEntries(new FormData(form[0]).entries());
+        packaging.newUser(data);
     }
 });
 
 // Login button is clicked.
 document.addEventListener('click', (e) => {
     if (e.target.id == 'login') {
-        packaging.login();
+        const form = menu.querySelector('#form-login').getElementsByTagName('form');
+        const data = Object.fromEntries(new FormData(form[0]).entries());
+        packaging.login(data);
     }
 });
 
