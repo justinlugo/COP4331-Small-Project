@@ -1,5 +1,6 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
+
 const menu = document.getElementById('menu');
 
 // Signup button is clicked.
@@ -40,7 +41,10 @@ menu.querySelector('#signup').addEventListener('click', () => {
 
         // Email
         const inputEmail = document.createElement('input');
-        inputEmail.setAttribute('type', 'text');
+        // inputEmail.setAttribute('type', 'text');
+        // Input of type email is possible with HTML5 it might be useful for
+        // error checking in the future.
+        inputEmail.setAttribute('type', 'email');
         inputEmail.setAttribute('name', 'email');
         inputEmail.setAttribute('placeholder', "Email");
 
@@ -64,7 +68,10 @@ menu.querySelector('#signup').addEventListener('click', () => {
 
         // Phonenumber
         const inputPhone = document.createElement('input');
-        inputPhone.setAttribute('type', 'text');
+        // inputPhone.setAttribute('type', 'text');
+        // Input of type tel is possible with HTML5 it might be useful for
+        // error checking in the future.
+        inputPhone.setAttribute('type', 'tel');
         inputPhone.setAttribute('name', 'phone');
         inputPhone.setAttribute('placeholder', "Phone");
 
@@ -138,6 +145,18 @@ document.addEventListener('click', (e) => {
     if (e.target.id == 'submit') {
         const form = menu.querySelector('#form-signup').getElementsByTagName('form');
         const data = Object.fromEntries(new FormData(form[0]).entries());
+
+        // This section: pulls plaintext password, hashes it, and replaces it in object
+        // Comment this to not hash passwords
+        data["password"] = md5(data["password"]);
+        //
+
+        // Test code for creating a span to show the login result, part of professor's code
+        const span = document.createElement('span');
+        span.setAttribute('id', 'result');
+        menu.appendChild(span);
+        //
+
         packaging.newUser(data);
     }
 });
@@ -147,13 +166,19 @@ document.addEventListener('click', (e) => {
     if (e.target.id == 'login') {
         const form = menu.querySelector('#form-login').getElementsByTagName('form');
         const data = Object.fromEntries(new FormData(form[0]).entries());
-        packaging.login(data);
+
+        // This section: pulls plaintext password, hashes it, and replaces it in object
+        // Comment this to not hash passwords
+        data["password"] = md5(data["password"]);
+        //
 
         // Test code for creating a span to show the login result, part of professor's code
         const span = document.createElement('span');
-        span.setAttribute('id', 'loginResult');
+        span.setAttribute('id', 'result');
         menu.appendChild(span);
         //
+
+        packaging.login(data);
     }
 });
 
