@@ -18,7 +18,7 @@ export const newUser = (data) => {
     userId = 0;
     firstName = "";
     lastName = "";
-    
+
     let url = urlBase + '/RegisterUser.' + ext;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -32,12 +32,16 @@ export const newUser = (data) => {
                 let jsonObject = JSON.parse(xhr.responseText);
                 
                 // Show the received JSON for debugging
-                document.getElementById("result").innerHTML = xhr.responseText;
+                document.getElementById("result").textContent = xhr.responseText;
                 
-                // Currently this check will always pass, unless actual error occurs
-                //
-                // Check if user was created successfully 
-                if (jsonObject.error == "")
+                // Check if username is already in the database 
+                if (jsonObject.error == "login already in use")
+                {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                    
+                    return;
+                }
+                else
                 {
                     saveCookie();
                     

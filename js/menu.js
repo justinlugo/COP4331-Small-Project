@@ -96,16 +96,26 @@ menu.querySelector('#signup').addEventListener('click', () => {
 
         // Append our dynamically created elements to the menu.
         menu.appendChild(wrapper);
+
+        // if result span is active, remove it.
+        let result = menu.querySelector('#result');
+        if (result != null) result.remove();
+
+        // Create a span for the result
+        result = document.createElement('span');
+        result.setAttribute('id', 'result');
+        menu.appendChild(result);
     } 
 })
 
 // Existing user button is clicked.
 menu.querySelector('#existing').addEventListener('click', () => {
-    // if signup form is active, remove it.
+    const loginCheck = menu.querySelector('#form-login');
     const formSignup = menu.querySelector('#form-signup');
+
+    // if signup form is active, remove it.
     if (formSignup != null) formSignup.remove();
 
-    const loginCheck = menu.querySelector('#form-login');
     if (loginCheck == null) {
         const wrapper = document.createElement('div');
         wrapper.setAttribute('id', 'form-login');
@@ -134,6 +144,15 @@ menu.querySelector('#existing').addEventListener('click', () => {
         wrapper.appendChild(loginBtn);
 
         menu.appendChild(wrapper);
+
+        // if result span is active, remove it.
+        let result = menu.querySelector('#result');
+        if (result != null) result.remove();
+
+        // Create a span for the result
+        result = document.createElement('span');
+        result.setAttribute('id', 'result');
+        menu.appendChild(result);
     }
 })
 
@@ -143,18 +162,31 @@ menu.querySelector('#existing').addEventListener('click', () => {
 // Submit button is clicked, in the signup form.
 document.addEventListener('click', (e) => {
     if (e.target.id == 'submit') {
+        // Takes the info from the form-signup and puts it in an object called data
         const form = menu.querySelector('#form-signup').getElementsByTagName('form');
         const data = Object.fromEntries(new FormData(form[0]).entries());
+
+        // Get the result span and clear the text that is in it
+        let result = document.getElementById("result");
+        result.textContent = "";
+
+        // Loop through the data object and check to make sure the value are not empty
+        for(const [key, value] of Object.entries(data)) {
+            
+            // Use string trim function to remove leading and trailing whitespace
+            data[key] = value.trim();
+
+            // Check if any entry field is empty and stop the submission and let the user know
+            if (value == "") {
+                result.textContent = `${key} is empty`;
+                console.log(`${key}:is empty`);
+                return;
+            }
+        }
 
         // This section: pulls plaintext password, hashes it, and replaces it in object
         // Comment this to not hash passwords
         data["password"] = md5(data["password"]);
-        //
-
-        // Test code for creating a span to show the login result, part of professor's code
-        const span = document.createElement('span');
-        span.setAttribute('id', 'result');
-        menu.appendChild(span);
         //
 
         packaging.newUser(data);
@@ -164,21 +196,33 @@ document.addEventListener('click', (e) => {
 // Login button is clicked.
 document.addEventListener('click', (e) => {
     if (e.target.id == 'login') {
+        // Takes the info from the form-signup and puts it in an object called data
         const form = menu.querySelector('#form-login').getElementsByTagName('form');
         const data = Object.fromEntries(new FormData(form[0]).entries());
+
+        // Get the result span and clear the text that is in it
+        let result = document.getElementById("result");
+        result.textContent = "";
+
+        // Loop through the data object and check to make sure the value are not empty
+        for(const [key, value] of Object.entries(data)) {
+            
+            // Use string trim function to remove leading and trailing whitespace
+            data[key] = value.trim();
+
+            // Check if any entry field is empty and stop the submission and let the user know
+            if (value == "") {
+                result.textContent = `${key} is empty`;
+                console.log(`${key}:is empty`);
+                return;
+            }
+        }
 
         // This section: pulls plaintext password, hashes it, and replaces it in object
         // Comment this to not hash passwords
         data["password"] = md5(data["password"]);
         //
 
-        // Test code for creating a span to show the login result, part of professor's code
-        const span = document.createElement('span');
-        span.setAttribute('id', 'result');
-        menu.appendChild(span);
-        //
-
         packaging.login(data);
     }
 });
-
