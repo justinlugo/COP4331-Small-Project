@@ -22,7 +22,6 @@ body {
 
 #layout {
 	display: grid; 
-  	grid-auto-columns: 1fr; 
   	grid-template-columns: 1fr 480px 1fr; 
   	grid-template-rows: .9fr .1fr; 
   	gap: 0px 0px; 
@@ -72,8 +71,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
-	user-select: all !important;
 }
 
 #menu input {
