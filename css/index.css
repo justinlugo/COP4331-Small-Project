@@ -1,0 +1,72 @@
+/* styling for the main page */
+#layout {
+	display: grid; 
+  	grid-template-columns: 1fr 480px 1fr; 
+  	grid-template-rows: .9fr .1fr; 
+  	gap: 0px 0px; 
+  	grid-template-areas: 
+    	". main ."
+		". footer ."; 
+	height: 100vh;
+}
+
+/* max and min widths are important to keep it "mobile friendly" */
+#main { 
+	grid-area: main;
+	max-width: 480px;
+	min-width: 320px;
+	text-align: center;
+}
+
+#main h1 {
+	font-size: 5.6em;
+}
+
+#main span {
+	font-size: 15px;
+	color: gray;
+}
+
+#title {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#menu {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#menu button {
+	height: 35px;
+	width: 320px;
+}
+
+#menu button:hover {
+	background-color: #1E90FF;
+}
+
+#menu form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#menu input {
+	height: 35px;
+	width: 320px;
+}
+
+#footer {
+	grid-area: footer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	justify-content: center;
+	color: gray;
+}
+
+#footer a {
+	font-size: .8em;
+}
