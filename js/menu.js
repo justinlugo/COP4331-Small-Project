@@ -20,13 +20,7 @@ menu.querySelector('#signup').addEventListener('click', () => {
         // Creating a form.
         const form = document.createElement('form');
         form.setAttribute('method', 'post');
-
-        // // A field for the full name.
-        // const inputName = document.createElement('input');
-        // inputName.setAttribute('type', 'text');
-        // inputName.setAttribute('name', 'fullname');
-        // inputName.setAttribute('placeholder', "Full Name");
-
+        
         // A field for the first name.
         const inputFirst = document.createElement('input');
         inputFirst.setAttribute('type', 'text');
@@ -60,31 +54,14 @@ menu.querySelector('#signup').addEventListener('click', () => {
         inputPass.setAttribute('name', 'password');
         inputPass.setAttribute('placeholder', "Password");
 
-        // // Verify Password
-        // const checkPass = document.createElement('input');
-        // checkPass.setAttribute('type', 'password');
-        // checkPass.setAttribute('name', 'checkpass');
-        // checkPass.setAttribute('placeholder', "Retype Password")
-
-        // Phonenumber
-        const inputPhone = document.createElement('input');
-        // inputPhone.setAttribute('type', 'text');
-        // Input of type tel is possible with HTML5 it might be useful for
-        // error checking in the future.
-        inputPhone.setAttribute('type', 'tel');
-        inputPhone.setAttribute('name', 'phone');
-        inputPhone.setAttribute('placeholder', "Phone");
-
         // Now with all these elements created, we need to append them to the form.
         // form.appendChild(inputName);
         form.appendChild(inputFirst);
         form.appendChild(inputLast);
         form.appendChild(inputUser);
         form.appendChild(inputPass);
-        //form.appendChild(checkPass);
         form.appendChild(inputEmail);
-        form.appendChild(inputPhone);
-
+        
         // Creating the submit button.
         const submitBtn = document.createElement('button');
         submitBtn.setAttribute('id', 'submit');
