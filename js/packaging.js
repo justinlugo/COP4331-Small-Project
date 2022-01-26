@@ -37,7 +37,7 @@ export const newUser = (data) => {
                 // Check if username is already in the database 
                 if (jsonObject.error == "login already in use")
                 {
-                    document.getElementById("result").innerHTML = xhr.responseText;
+                    document.getElementById("result").textContent = xhr.responseText;
                     
                     return;
                 }
@@ -54,7 +54,7 @@ export const newUser = (data) => {
     }
     catch(err)
     {
-        document.getElementById("result").innerHTML = err.message;
+        document.getElementById("result").textContent = err.message;
     }
     
     console.log("New user submitted.");
@@ -83,13 +83,13 @@ export const login = (data) => {
                 let jsonObject = JSON.parse (xhr.responseText);
 
                 // Show the received JSON for debugging
-                document.getElementById("result").innerHTML = xhr.responseText;
+                document.getElementById("result").textContent = xhr.responseText;
                 
                 userId = jsonObject.id;
 
                 if (userId < 1)
                 {
-                    document.getElementById("result").innerHTML = "User/Password combination incorrect";
+                    document.getElementById("result").textContent = "User/Password combination incorrect";
                     return;
                 }
 
@@ -106,7 +106,7 @@ export const login = (data) => {
     }
     catch(err)
     {
-        document.getElementById("result").innerHTML = err.message;
+        document.getElementById("result").textContent = err.message;
     }
 
     console.log("Login attempt.");
