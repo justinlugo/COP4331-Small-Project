@@ -1,26 +1,35 @@
 <?php
 	$inData = getRequestInfo();
-	
+
 	$firstName  = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	$login = $inData["login"];
 	$password = $inData["password"];
 	$email = $inData["email"];
-	$phone = $inData["phone"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
-	} 
+	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Users (firstName,lastName,login,password,email,phone) VALUES(?,?,?,?,?,?)");
-		$stmt->bind_param("ssssss", $firstName, $lastName, $login, $password, $email, $phone);
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
-		returnWithError("");
+		$query = mysqli_query($conn, "SELECT id FROM Users WHERE Login = '$login'");
+		$rowCheck = mysqli_num_rows($query);
+		
+		if ($rowCheck > 0)
+		{
+			returnWithError("login already in use");
+		}
+		else
+		{
+			$stmt = $conn->prepare("INSERT into Users (firstName,lastName,login,password,email) VALUES(?,?,?,?,?)");
+			$stmt->bind_param("sssss", $firstName, $lastName, $login, $password, $email);
+			$stmt->execute();
+			$stmt->close();
+			$conn->close();
+			returnWithError("");
+		}
 	}
 
 	function getRequestInfo()
