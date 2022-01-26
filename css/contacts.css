@@ -32,6 +32,10 @@
     white-space: nowrap;
 }
 
+#table-header {
+	border: 1px solid black;
+}
+
 /* "<element> > *" is used to recurisvly assign the following styling to the
    child elements in a given <element> */
 #table-header, #table-content > * {
