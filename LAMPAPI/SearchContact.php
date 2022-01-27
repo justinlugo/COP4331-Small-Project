@@ -12,8 +12,8 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select * from Contacts where lastName like ? and userId = ? order by lastName");
-		$user = "%" . $inData["search"] . "%";]
+		$stmt = $conn->prepare("select * from Contacts where userId = ? order by lastName");
+		$user = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $user, $inData["userId"]);
 		$stmt->execute();
 		
