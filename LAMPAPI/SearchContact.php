@@ -19,6 +19,8 @@
 		
 		$result = $stmt->get_result();
 		
+		$userObj = new stdClass();
+
 		while($row = $result->fetch_assoc())
 		{
 			if( $searchCount > 0 )
@@ -29,7 +31,7 @@
 			$searchResults .= '"' . $row["firstName"] . '" ';
 			$searchResults .= '"' . $row["lastName"] . '" ';
 			$searchResults .= '"' . $row["email"] . '" ';
-			$searchResults .= '"' . $row["phone"] . '" ';
+			$searchResults .= '"' . $row["phone"] . '"';
 		}
 		
 		if( $searchCount == 0 )
