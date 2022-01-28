@@ -10,6 +10,11 @@ const tableContent = main.querySelector("#table-content");
 main.onresize = setTableHeight();
 main.onload = setTableHeight();
 
+// The userID, firstName, lastName of logged in user
+let userId = 0;
+let firstName = "";
+let lastName = "";
+
 const emptyJSON = {
     "FirstName": "First Name",
     "LastName": "Last Name",
@@ -44,6 +49,8 @@ function setTableHeight() {
 // This is an immediatly envoked function.
 // TESTING ONLY
 (function() {
+    // Read the cookie if there is one
+    // readCookie();
 
     // Manually defined JSON for testing purposes.
     // JSON object contains an field 'contacts' which is an array of 
@@ -94,7 +101,12 @@ function setTableHeight() {
     // For loop of lenght of 'contacts' array inside JSON object
     for(let i = 0; i < myJSON['contacts'].length; i++)
         createRow(myJSON['contacts'][i]);
-    
+
+    // Says hello to user by name
+    const header = document.getElementById("header");
+    const usersName = document.createElement('div');
+    usersName.textContent = `Hello, ${firstName} ${lastName}`;
+    header.appendChild(usersName);
 })();
 
 // Submit button is clicked, in the signup form.
@@ -259,3 +271,53 @@ function createInputRow(inputJSON) {
     // Attach the row to the top of table
     tableContent.prepend(row);
 }
+
+// Cookie functions taken from professor's code
+function readCookie()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+	
+	if( userId < 0 )
+	{
+		window.location.href = "index.html";
+	}
+	else
+	{
+		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+	}
+}
+
+function doLogout()
+{
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	window.location.href = "index.html";
+}
+
+// Logout button is clicked, in the signup form.
+document.addEventListener('click', (e) => {
+    if (e.target.id == 'logout') {
+        doLogout();
+    }
+});

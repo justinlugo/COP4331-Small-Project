@@ -3,6 +3,9 @@ import * as packaging from './packaging.js';
 
 const menu = document.getElementById('menu');
 
+// When the page loads read cookie
+main.onLoad = packaging.readCookie();
+
 // Signup button is clicked.
 menu.querySelector('#signup').addEventListener('click', () => {
     const formSignup = menu.querySelector('#form-signup');
