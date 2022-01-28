@@ -12,9 +12,10 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select firstName,lastName,email,phone from Contacts where (firstName like ? or lastName like ?) and userId = ?");
+		$stmt = $conn->prepare("select firstName,lastName,email,phone from Contacts where 
+		(firstName like ? or lastName like ? or email like ? or phone like ?) and userId = ?");
 		$user = "%" . $inData["search"] . "%";
-		$stmt->bind_param("sss", $user, $user, $inData["userId"]);
+		$stmt->bind_param("sssss", $user, $user, $user, $user, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
