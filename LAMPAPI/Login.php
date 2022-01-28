@@ -21,8 +21,10 @@
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			$id = $row['ID'];
-			$query = mysqli_query($conn, "UPDATE Users SET DateLastLoggedIn = now() WHERE ID = '$id'");
+			$updateDate = $conn->prepare("UPDATE Users SET DateLastLoggedIn=? WHERE ID=?");
+			$updateDate->bind_param("si", NOW(), $row['ID']);
+			$updateDate->execute();
+			$updateDate->close();
 			
 			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 		}

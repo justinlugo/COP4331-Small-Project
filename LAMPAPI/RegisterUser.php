@@ -14,7 +14,10 @@
 	}
 	else
 	{
-		$query = mysqli_query($conn, "SELECT id FROM Users WHERE Login = '$login'");
+		$query = $conn->prepare("SELECT id FROM Users WHERE Login=?");
+		$query->bind_param("s", $login);
+		$query->execute();
+		$query->close();
 		$rowCheck = mysqli_num_rows($query);
 		
 		if ($rowCheck > 0)
