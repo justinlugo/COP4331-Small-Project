@@ -10,6 +10,13 @@ const tableContent = main.querySelector("#table-content");
 main.onresize = setTableHeight();
 main.onload = setTableHeight();
 
+const emptyJSON = {
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number"
+};
+
 function setTableHeight() {
     let mainHeight = main.clientHeight;
     let headerHeight = tableHeader.clientHeight;
@@ -90,12 +97,28 @@ function setTableHeight() {
     
 })();
 
+// Submit button is clicked, in the signup form.
+document.addEventListener('click', (e) => {
+    if (e.target.id == 'createContact') {
+
+        // if rowInput doesnt exist create it. Else do nothing
+        let existingRow = tableContent.querySelector('#rowInput');
+        if (existingRow == null) {        
+            // Creates an input row using the sample object
+            createInputRow(emptyJSON);
+        }
+    }
+});
+
+// Creates a row and adds to the table from JSON object
 function createRow(contactJSON) {
     // Get the table
-    const tableContent = document.getElementById("table-content");
+    // const tableContent = document.getElementById("table-content");
+    const tableContent = document.getElementById("contactTable");
 
     // Create a row.
-    const row = document.createElement('tr');
+    // const row = document.createElement('tr');
+    const row = tableContent.insertRow();
     row.setAttribute('class', 'row');
 
     // Creating first name cell.
@@ -164,4 +187,75 @@ function createRow(contactJSON) {
 
     // Attach the row to the table
     tableContent.appendChild(row);
+}
+
+// Creates an input row and adds to the table from JSON object
+function createInputRow(inputJSON) {
+    // Get the table
+    const tableContent = document.getElementById("contactTable");
+
+    // Create a row.
+    // const row = document.createElement('tr');
+    const row = tableContent.insertRow(0);
+    // Made rowInput an ID since we only want one input row at a time
+    row.setAttribute('id', 'rowInput');
+    // row.setAttribute('class', 'rowInput');
+
+    // Creating first name cell.
+    const firstName = document.createElement('td');
+    firstName.setAttribute('class', 'firstName');
+    // Set the cell to have an input for first name
+    const inputFirst = document.createElement("input");
+    inputFirst.setAttribute('type', 'text');
+    inputFirst.placeholder = inputJSON.FirstName;
+    firstName.appendChild(inputFirst);
+    
+    // Creating last name cell.
+    const lastName = document.createElement('td');
+    lastName.setAttribute('class', 'lastName');
+    // Set the cell to have an input for last name
+    const inputLast = document.createElement("input");
+    inputLast.setAttribute('type', 'text');
+    inputLast.placeholder = inputJSON.LastName;
+    lastName.appendChild(inputLast);
+
+    // Creating email cell.
+    const email = document.createElement('td');
+    email.setAttribute('class', 'email');
+    // Set the cell to have an input for email
+    const inputEmail = document.createElement("input");
+    inputEmail.setAttribute('type', 'email');
+    inputEmail.placeholder = inputJSON.email;
+    email.appendChild(inputEmail);
+
+    // Creating phone cell.
+    const phone = document.createElement('td');
+    phone.setAttribute('class', 'phone');
+    // Set the cell to have an input for phone
+    const inputPhone = document.createElement("input");
+    inputPhone.setAttribute('type', 'tel');
+    inputPhone.placeholder = inputJSON.phone;
+    phone.appendChild(inputPhone);
+
+    // Creating edit cell.
+    const submitContact = document.createElement('td');
+    // Make the button take up 2 td's since other lines will have 2?
+    submitContact.setAttribute('colspan', '2');
+    submitContact.setAttribute('class', 'submitBtn');
+    // Create submit button
+    const submitBtn = document.createElement('button');
+    submitBtn.setAttribute('class', 'submitContact');
+    submitBtn.textContent = "Submit";
+    // Attach button to cell
+    submitContact.appendChild(submitBtn);
+
+    // Attach all the cells to the row
+    row.appendChild(firstName);
+    row.appendChild(lastName);
+    row.appendChild(email);
+    row.appendChild(phone);
+    row.appendChild(submitContact);
+
+    // Attach the row to the top of table
+    tableContent.prepend(row);
 }
