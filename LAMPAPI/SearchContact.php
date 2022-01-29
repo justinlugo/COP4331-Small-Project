@@ -17,7 +17,7 @@
 	{
 		// prepare sends the command verbatim to mysql. the "?"s correspond to the bind_param from $inData[] and userId from the user logged in.
 		$stmt = $conn->prepare("select firstName,lastName,email,phone,id from Contacts where 
-		(firstName like ? or lastName like ? or email like ? or phone like ?) and userId = ?");
+		(firstName like ? or lastName like ? or email like ? or phone like ?) and userId = ? order by lastName");
 
 		// % means it will match any part of the firstName, lastName, etc. with the search input. stores the search in $user.
 		$user = "%" . $inData["search"] . "%";
