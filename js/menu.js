@@ -1,17 +1,17 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
+main.onload = packaging.readCookie();
 
 const menu = document.getElementById('menu');
-
 // Signup button is clicked.
 menu.querySelector('#signup').addEventListener('click', () => {
     const formSignup = menu.querySelector('#form-signup');
     const formLogin = menu.querySelector('#form-login');
-    // if the user decided they want to signup instead of login, we will need
+    // If the user decided they want to signup instead of login, we will need
     // to remove the login form dynamically.
     if (formLogin != null) formLogin.remove();
    
-    // check if signup has already been clicked.
+    // Check if signup has already been clicked.
     if (formSignup == null) {
         // Create a wrapper for the form and children.
         const wrapper = document.createElement('div');
