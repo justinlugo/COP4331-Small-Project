@@ -256,7 +256,7 @@ function createInputRow(inputJSON) {
     submitContact.setAttribute('class', 'submitBtn');
     // Create submit button
     const submitBtn = document.createElement('button');
-    submitBtn.setAttribute('class', 'submitContact');
+    submitBtn.setAttribute('id', 'submitContact');
     submitBtn.textContent = "Submit";
     // Attach button to cell
     submitContact.appendChild(submitBtn);
@@ -269,7 +269,85 @@ function createInputRow(inputJSON) {
     row.appendChild(submitContact);
 
     // Attach the row to the top of table
-    tableContent.prepend(row);
+    // tableContent.prepend(row);
+}
+
+// Submit user button is clicked add contact.
+document.addEventListener('click', (e) => {
+    if (e.target.id == 'submitContact') {
+        console.log("submit");
+        // Register contact
+        registerContact();
+    }
+});
+
+// Function for registering a new contact
+function registerContact() {
+    // Get inputs and convert to JSON
+    // Get the row
+    const rowData = document.getElementById("rowInput");
+    console.log(rowData);
+    // Convert the row to an object
+    const data = rowToObject(rowData);
+    console.log(data);
+    // Convert the data to JSON
+    const myJSON = JSON.stringify(data);
+    console.log(myJSON);
+
+    // HTTP post for sending JSON login info.
+
+    // Setup the HTTP request to send to the API endpoint
+    let url = urlBase + '/RegisterContact.' + ext;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        // After any change happens 
+        xhr.onreadystatechange = function()
+        {
+            // When the send is successful take the response and store in jsonObject
+            if (this.readyState == 4 && this.status == 200)
+            {
+                let jsonObject = JSON.parse (xhr.responseText);
+
+                // Show the received JSON for debugging
+                // document.getElementById("result").textContent = xhr.responseText;
+                
+                // If no errors then adding of user was success
+                if (jsonObject.error == "") {
+                    // Since user was added remove the input row.
+                    rowData.remove();
+                }
+            }
+        };
+        // Send the JSON
+        xhr.send(myJSON);
+    }
+    catch(err)
+    {
+        // If there's an error display it
+        // document.getElementById("result").textContent = err.message;
+    }
+}
+
+// Package the row as an object
+function rowToObject(element) {
+    // Create empty object called new contact
+    const newContact = new Object();
+
+    // Individually grab each elemnt from the row to put in object field
+    newContact.firstName = element.cells[0].children[0].value;
+    newContact.lastName = element.cells[1].children[0].value;
+    newContact.email = element.cells[2].children[0].value;
+    newContact.phone = element.cells[3].children[0].value;
+    newContact.userId = userId;
+
+    // Print for debugging
+    console.log(newContact);
+
+    // Return newContact object
+    return newContact;
 }
 
 // Cookie functions taken from professor's code
