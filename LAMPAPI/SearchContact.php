@@ -82,5 +82,3 @@
 		$retValue = '{"error":"' . $err . '"}';
 		echo  $retValue;
 	}
-	
-?>
