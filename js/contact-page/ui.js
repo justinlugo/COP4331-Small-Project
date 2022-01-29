@@ -116,6 +116,16 @@ function confirmInput(array) {
     return inputPackage;
 }
 
+// When user confirms, it will change the input fields into text content for 
+// the cells.
+function inputs_toCells(array) {
+    for (let i = 0; i < dataSize; i++) {
+        const value = array[i].children[0].value;
+        array[i].removeChild(array[i].children[0]);
+        array[i].textContent = value;
+    }
+}
+
 // Catalouge of event listeners, perform these sets of functions.
 // We can watch the entire document, and have a "switch" to check which one
 // was clicked.
@@ -148,6 +158,8 @@ function confirmInput(array) {
             //       overwrite this data to the server.
             const packagedInput = confirmInput(rowInputs);
             console.log(packagedInput);
+            
+            inputs_toCells(rowInputs);
         }
     });
 })();
