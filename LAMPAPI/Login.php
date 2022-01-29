@@ -1,4 +1,3 @@
-
 <?php
 
 	$inData = getRequestInfo();
@@ -25,11 +24,10 @@
 		if( $row = $result->fetch_assoc()  )
 		{
 			# Update the DateLastLoggedIn field.
-			$updateDate = $conn->prepare("UPDATE Users SET DateLastLoggedIn=? WHERE ID=?");
-			$updateDate->bind_param("si", NOW(), $row['ID']);
+			$updateDate = $conn->prepare("UPDATE Users SET DateLastLoggedIn=NOW() WHERE ID=?");
+			$updateDate->bind_param("i", $row['ID']);
 			$updateDate->execute();
-			$updateDate->close();
-			
+
 			# Return the users first name, last name, and ID.
 			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 		}
@@ -37,7 +35,7 @@
 		{
 			returnWithError("No Records Found");
 		}
-
+		$updateDate->close();
 		$stmt->close();
 		$conn->close();
 	}
