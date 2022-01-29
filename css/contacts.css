@@ -26,7 +26,6 @@
 }
 
 #main table {
-    table-layout: fixed;
     width: 100%;
     /* prevents the text from jumbling and forming new lines inside cells */
     white-space: nowrap;

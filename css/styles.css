@@ -21,3 +21,12 @@ body {
 	/* prevents scrollbar */
 	overflow: hidden;
 }
+
+/* Enable users highlight their text in input fields */
+input {
+	-webkit-touch-callout: text;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}

@@ -81,10 +81,47 @@ function createInputRow(inputJSON) {
     tableContent.getElementsByTagName('table')[0].prepend(row);
 }
 
+const dataSize = 4;
+// Convert all cells in a given row to input fields.
+function convertCells_toInputs(array) {
+    // No magic numbers; we have 4 cells of data to convert into an input field.
+    for (let i = 0; i < dataSize; i++) {
+        const inputField = document.createElement('input');
+        const value = array[i].textContent;
+        // Remove text content from the cell.
+        array[i].textContent = '';
+        inputField.value = value;
+        
+        array[i].appendChild(inputField);
+    }
+}
+
+// Takes in the array of the row we confirmed on, and then returns an object
+// of the new data to update with.
+function confirmInput(array) {
+    // TODO: Find away to grab current row userID?
+    const inputPackage = {
+        firstName:  '',
+        lastName:   '',
+        email:      '',
+        phone:      ''
+    };
+
+    let i = 0;
+    for (const property in inputPackage) {
+        inputPackage[property] = array[i].children[0].value;
+        i++;
+    }
+
+    return inputPackage;
+}
+
 // Catalouge of event listeners, perform these sets of functions.
+// We can watch the entire document, and have a "switch" to check which one
+// was clicked.
 (function eventListeners() {
-// When user clicks "Add Contact".
     document.addEventListener('click', (e) => {
+        // Add Contact is clicked.
         if (e.target.id == 'createContact') {
             // if rowInput doesnt exist create it. Else do nothing.
             const existingRow = tableContent.querySelector('#rowInput');
@@ -92,6 +129,25 @@ function createInputRow(inputJSON) {
                 // Creates an input row using the sample object
                 createInputRow(emptyJSON);
             }
+        } 
+        // Edit is clicked.
+        else if(e.target.className == 'editBtn') {
+            // Where the e'th edit button clicked, store the array of the row
+            // where that button is contained.
+            const rowCells = Array.from(e.target.parentNode.parentNode.cells);
+            convertCells_toInputs(rowCells);
+            
+            // Convert the edit button into a "confirm button".
+            e.target.className = "confirmBtn";
+            e.target.textContent = "C";
+        } 
+        // Confirm is clicked.
+        else if(e.target.className == 'confirmBtn') {
+            const rowInputs = Array.from(e.target.parentNode.parentNode.cells);
+            // TODO: This is where PHP magick happens, we need to find a way to
+            //       overwrite this data to the server.
+            const packagedInput = confirmInput(rowInputs);
+            console.log(packagedInput);
         }
     });
 })();
