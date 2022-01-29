@@ -1,18 +1,25 @@
 <?php
 	$inData = getRequestInfo();
-	
-	$color = $inData["color"];
-	$userId = $inData["userId"];
+
+	$firstName  = $inData["firstName"];
+	$lastName = $inData["lastName"];
+	$email = $inData["email"];
+    $phone = $inData["phone"];
+    $userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
-	} 
+	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Colors (UserId,Name) VALUES(?,?)");
-		$stmt->bind_param("ss", $userId, $color);
+        // mysql command format to delete a contact dependent on the id.
+	    $stmt = $conn->prepare("delete from Contacts where id = ?");
+
+        // takes the id
+        $idDelete = $inData["id"];
+		$stmt->bind_param("i", $idDelete);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
