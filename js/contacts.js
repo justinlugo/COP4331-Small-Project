@@ -1,3 +1,7 @@
+// We can seperate js files into "components", very similar to Java with classes.
+const urlBase = "http://cop4331small.xyz/LAMPAPI";
+const ext = "php";
+
 // anything dealing with the contact app (table of contacts for each user)
 
 // Set table height dynamically to the height of the window/device. This
@@ -297,7 +301,7 @@ function registerContact() {
     // HTTP post for sending JSON login info.
 
     // Setup the HTTP request to send to the API endpoint
-    let url = urlBase + '/RegisterContact.' + ext;
+    let url = urlBase + '/AddContact.' + ext;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -341,7 +345,28 @@ function rowToObject(element) {
     newContact.lastName = element.cells[1].children[0].value;
     newContact.email = element.cells[2].children[0].value;
     newContact.phone = element.cells[3].children[0].value;
+
+    // Loop through the newContact object and check to make sure the value are not empty
+    for(const [key, value] of Object.entries(newContact)) {
+            
+        // Use string trim function to remove leading and trailing whitespace
+        newContact[key] = value.trim();
+
+        // Check if any entry field is empty and stop the submission and let the user know
+        if (value == "") {
+            // result.textContent = `${key} is empty`;
+            console.log(`${key}:is empty`);
+            return;
+        }
+    }
+
+    // Check the user id and add it to the object
+    if (userId < 0) {
+        console.log("Problem with userId");
+        return;
+    }
     newContact.userId = userId;
+
 
     // Print for debugging
     console.log(newContact);
