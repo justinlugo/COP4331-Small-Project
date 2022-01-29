@@ -161,6 +161,14 @@ function inputs_toCells(array) {
             
             inputs_toCells(rowInputs);
         }
+        else if(e.target.className == 'removeBtn') {
+            const table = tableContent.getElementsByTagName('table')[0];
+            const trashRow = e.target.parentNode.parentNode;
+
+            table.removeChild(trashRow);
+            // TODO: This is where PHP magick happens,
+            //       Delete user from the database.
+        }
     });
 })();
 
