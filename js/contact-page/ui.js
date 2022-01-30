@@ -106,14 +106,24 @@ function confirmInput(array) {
         firstName:  '',
         lastName:   '',
         email:      '',
-        phone:      ''
+        phone:      '',
+        contactId:''
     };
+
 
     let i = 0;
     for (const property in inputPackage) {
-        inputPackage[property] = array[i].children[0].value;
+        console.log(array[i]);
+        console.log(array[i].children[0]);
+
+        if (property != 'contactId')
+            inputPackage[property] = array[i].children[0].value;
+        
+        inputPackage[property] = array[i].children[0].textContent;
         i++;
     }
+
+    console.log(inputPackage);
 
     return inputPackage;
 }

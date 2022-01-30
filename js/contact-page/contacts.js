@@ -15,22 +15,17 @@ let lastName = "";
 // Watches the height of main, and will dynamically set the height of the table.
 ui.heightObserver.observe(main);
 
-// Create a greeting for the user.
-const greeting = document.createElement('span');
-greeting.textContent = `Hello, ${firstName} ${lastName}`;
-header.appendChild(greeting);
-
 // Dynamiclly creates rows for each contact the user has created.
 function createRow(contact) {
     const row = document.createElement('tr');
 
     const firstName = document.createElement('td');
     firstName.setAttribute('class', 'firstName');
-    firstName.textContent = contact.FirstName;
+    firstName.textContent = contact.firstName;
 
     const lastName = document.createElement('td');
     lastName.setAttribute('class', 'lastName');
-    lastName.textContent = contact.LastName;
+    lastName.textContent = contact.lastName;
 
     const email = document.createElement('td');
     email.setAttribute('class', 'email');
@@ -39,6 +34,15 @@ function createRow(contact) {
     const phone = document.createElement('td');
     phone.setAttribute('class', 'phone');
     phone.textContent = contact.phone;
+
+    const contactId = document.createElement('td');
+    contactId.setAttribute('class', 'contactId');
+    // contactId.style.display = none;
+    contactId.setAttribute('style', 'display:none');
+
+    const idSpan = document.createElement('span');
+    idSpan.textContent = contact.id;
+    contactId.appendChild(idSpan);
 
     const edit = document.createElement('td');
     edit.setAttribute('class', 'edit');
@@ -60,6 +64,7 @@ function createRow(contact) {
     row.appendChild(lastName);
     row.appendChild(email);
     row.appendChild(phone);
+    row.appendChild(contactId);
     row.appendChild(edit);
     row.appendChild(remove);
 
@@ -101,6 +106,11 @@ function readCookie()
 	{
 		// document.getElementById("userName").textContent = "Logged in as " + firstName + " " + lastName;
 	}
+
+  // Create a greeting for the user.
+  const greeting = document.createElement('span');
+  greeting.textContent = `Hello, ${firstName} ${lastName}`;
+  header.appendChild(greeting);
 }
 
 export function registerContact() {
@@ -282,37 +292,43 @@ logOutBtn.addEventListener('click', () => {
           "FirstName": "Justin",
           "LastName": "Justin Last",
           "email": "Justin@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         },
         {
           "FirstName": "Austin",
           "LastName": "Austin Last",
           "email": "Austin@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         },
         {
           "FirstName": "Sam",
           "LastName": "Sam Last",
           "email": "Sam@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         },
         {
           "FirstName": "Tyler",
           "LastName": "Tyler Last",
           "email": "Tyler@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         },
         {
           "FirstName": "Zach",
           "LastName": "Zach Last",
           "email": "Zach@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         },
         {
           "FirstName": "Victor",
           "LastName": "Victor Last",
           "email": "Victor@email.com",
-          "phone": "123-123-1234"
+          "phone": "123-123-1234",
+          "id": 5
         }
       ]
   };
