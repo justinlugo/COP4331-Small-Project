@@ -1,5 +1,6 @@
-/* styling for the contacts page */
+@import url('./styles.css');
 
+/* styling for the contacts page */
 #layout {
 	display: grid; 
   	grid-template-columns: 1fr 90vw 1fr; 
@@ -11,6 +12,8 @@
 		". footer ."; 
 	height: 100vh;
     width: 100vw;
+	background-color: var(--color-accent-light);
+	color: var(--color-accent-dark);
 }
 
 #header {
@@ -26,14 +29,14 @@
 }
 
 #main table {
-    table-layout: fixed;
     width: 100%;
     /* prevents the text from jumbling and forming new lines inside cells */
     white-space: nowrap;
 }
 
 #table-header {
-	border: 1px solid black;
+    background-color: hsla(239, 29%, 54%);
+    text-transform: uppercase;
 }
 
 /* "<element> > *" is used to recurisvly assign the following styling to the
@@ -43,7 +46,8 @@
 }
 
 #table-header th, #table-content td {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #table-header th {
@@ -54,18 +58,4 @@
     overflow: auto;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-#footer {
-	grid-area: footer;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	justify-content: center;
-	color: gray;
-}
-
-#footer a {
-	font-size: .8em;
 }

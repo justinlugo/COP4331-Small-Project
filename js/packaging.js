@@ -101,8 +101,7 @@ export const login = (data) => {
                 // Saves the users first and last name
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
-
-                // Save cookie using ID, first name, and last name
+                // Save cookie using ID, first name, and last name.
                 saveCookie();
 
                 // Move to the next html page to access contacts
@@ -123,11 +122,11 @@ function saveCookie()
 {
 	let minutes = 20;
 	let date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
+	date.setTime(date.getTime() + (minutes *60 *1000));	
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-// Cookie functions taken from professor's code
+// Cookie functions taken from Professor Leinecker's code.
 export function readCookie()
 {
 	userId = -1;
@@ -137,21 +136,22 @@ export function readCookie()
 	{
 		let thisOne = splits[i].trim();
 		let tokens = thisOne.split("=");
-		if( tokens[0] == "firstName" )
+		
+        if(tokens[0] == "firstName")
 		{
 			firstName = tokens[1];
 		}
-		else if( tokens[0] == "lastName" )
+		else if(tokens[0] == "lastName")
 		{
 			lastName = tokens[1];
 		}
-		else if( tokens[0] == "userId" )
+		else if(tokens[0] == "userId")
 		{
-			userId = parseInt( tokens[1].trim() );
+			userId = parseInt(tokens[1].trim());
 		}
 	}
-	
-	if( userId < 0 )
+
+	if(userId < 0)
 	{
         // If there is no user id stay on index.html
 		// window.location.href = "index.html";
@@ -160,6 +160,6 @@ export function readCookie()
 	{
         // If there is a user id move to the contacts.html
         window.location.href = "contacts.html";
-		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		// document.getElementById("userName").textContent = "Logged in as " + firstName + " " + lastName;
 	}
-}
+} 

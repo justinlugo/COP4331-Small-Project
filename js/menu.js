@@ -1,5 +1,6 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
+main.onload = packaging.readCookie();
 
 const menu = document.getElementById('menu');
 
@@ -10,11 +11,11 @@ main.onLoad = packaging.readCookie();
 menu.querySelector('#signup').addEventListener('click', () => {
     const formSignup = menu.querySelector('#form-signup');
     const formLogin = menu.querySelector('#form-login');
-    // if the user decided they want to signup instead of login, we will need
+    // If the user decided they want to signup instead of login, we will need
     // to remove the login form dynamically.
     if (formLogin != null) formLogin.remove();
    
-    // check if signup has already been clicked.
+    // Check if signup has already been clicked.
     if (formSignup == null) {
         // Create a wrapper for the form and children.
         const wrapper = document.createElement('div');
@@ -86,7 +87,7 @@ menu.querySelector('#signup').addEventListener('click', () => {
         result.setAttribute('id', 'result');
         menu.appendChild(result);
     } 
-})
+});
 
 // Existing user button is clicked.
 menu.querySelector('#existing').addEventListener('click', () => {
@@ -134,10 +135,7 @@ menu.querySelector('#existing').addEventListener('click', () => {
         result.setAttribute('id', 'result');
         menu.appendChild(result);
     }
-})
-
-// Since the submit and login buttons are dynamically created, we will need to 
-// use "event delegation" to handle these elements when interacted with.
+});
 
 // Submit button is clicked, in the signup form.
 document.addEventListener('click', (e) => {

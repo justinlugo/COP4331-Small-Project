@@ -1,13 +1,31 @@
+@import url('./styles.css');
+:root {
+	--section-padding: 22px;
+	--color-wall: hsl(250, 3%, 65%);
+	--max-desktop-width: 800px;
+}
+
+body {
+	background-color: var(--color-wall);
+}
+
 /* styling for the main page */
 #layout {
 	display: grid; 
-  	grid-template-columns: 1fr 480px 1fr; 
-  	grid-template-rows: .9fr .1fr; 
+  	grid-template-columns: 40vw 1fr 480px 1fr; 
+  	grid-template-rows: .1fr .8fr .1fr; 
   	gap: 0px 0px; 
-  	grid-template-areas: 
-    	". main ."
-		". footer ."; 
+  	grid-template-areas:
+	  	"push header header header" 
+    	"push . main ."
+		"push . footer ."; 
 	height: 100vh;
+	color: var(--color-accent-dark);
+	position: relative;
+}
+
+#header {
+	grid-area: header;
 }
 
 /* max and min widths are important to keep it "mobile friendly" */
@@ -16,6 +34,7 @@
 	max-width: 480px;
 	min-width: 320px;
 	text-align: center;
+	border-radius: 30px;
 }
 
 #main h1 {
@@ -24,26 +43,33 @@
 
 #main span {
 	font-size: 15px;
-	color: gray;
 }
 
 #title {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
+	position:sticky;
 }
 
 #menu {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
 }
 
 #menu button {
 	height: 35px;
 	width: 320px;
+	text-transform: uppercase;
+	font-size: 1em;
 }
 
 #menu button:hover {
-	background-color: #1E90FF;
+	background-color: var(--color-accent-dark);
+	color: var(--color-wall);
+}
+
+#existing {
+	background-color: hsla(239, 50%, 54%, .3);
 }
 
 #menu form {
@@ -54,19 +80,25 @@
 
 #menu input {
 	height: 35px;
-	width: 320px;
-}
-
-#footer {
-	grid-area: footer;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	justify-content: center;
-	color: gray;
-}
-
-#footer a {
+	width: 305px;
 	font-size: .8em;
+}
+
+#pegasus {
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
+	width: 25%;
+	position: sticky;
+}
+
+#bg {
+	background-color: var(--color-wall);
+	background-image: url(/public/chair.jpg);
+	background-attachment: fixed;
+	background-size: 1366px;
+	min-width: 100vw;
+	min-height: 100vh;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: 0;
 }
