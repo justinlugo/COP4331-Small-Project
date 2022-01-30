@@ -142,6 +142,15 @@ function inputs_toCells(array) {
 // We can watch the entire document, and have a "switch" to check which one
 // was clicked.
 (function eventListeners() {
+
+    document.addEventListener('input', (e) => {   
+        // Every time there is an event using the search bar
+        if (e.target.id == 'searchBar') {
+            // Send text in search bar to search
+            contact.searchContacts();
+        }
+    });
+
     document.addEventListener('click', (e) => {
         // Add Contact is clicked.
         if (e.target.id == 'createContact') {
@@ -157,7 +166,7 @@ function inputs_toCells(array) {
             contact.registerContact();
         }
         // Edit is clicked.
-        else if(e.target.className == 'editBtn') {
+        else if (e.target.className == 'editBtn') {
             // Where the e'th edit button clicked, store the array of the row
             // where that button is contained.
             const rowCells = Array.from(e.target.parentNode.parentNode.cells);
@@ -168,7 +177,7 @@ function inputs_toCells(array) {
             e.target.textContent = "C";
         } 
         // Confirm is clicked.
-        else if(e.target.className == 'confirmBtn') {
+        else if (e.target.className == 'confirmBtn') {
             const rowInputs = Array.from(e.target.parentNode.parentNode.cells);
             // TODO: This is where PHP magick happens, we need to find a way to
             //       overwrite this data to the server.
@@ -178,18 +187,13 @@ function inputs_toCells(array) {
             inputs_toCells(rowInputs);
         }
         // Remove Contact is clicked.
-        else if(e.target.className == 'removeBtn') {
+        else if (e.target.className == 'removeBtn') {
             const table = tableContent.getElementsByTagName('table')[0];
             const trashRow = e.target.parentNode.parentNode;
 
             table.removeChild(trashRow);
             // TODO: This is where PHP magick happens,
             //       Delete user from the database.
-        }
-        // Every time there is an event using the search bar
-        else if (e.target.id == 'searchBar') {
-            // Send text in search bar to search
-            contact.searchContacts();
         }
     });
 })();
