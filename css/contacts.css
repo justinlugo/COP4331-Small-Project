@@ -1,0 +1,61 @@
+@import url('./styles.css');
+
+/* styling for the contacts page */
+#layout {
+	display: grid; 
+  	grid-template-columns: 1fr 90vw 1fr; 
+  	grid-template-rows: .1fr .8fr .1fr; 
+  	gap: 0px 0px; 
+  	grid-template-areas: 
+        ". header ."
+    	". main ."
+		". footer ."; 
+	height: 100vh;
+    width: 100vw;
+	background-color: var(--color-accent-light);
+	color: var(--color-accent-dark);
+}
+
+#header {
+    grid-area: header;
+}
+
+#main { 
+	grid-area: main;
+	max-width: 90vw;
+    /* forces main grid to remain in grid, without pushing on other grids as 
+    overflow happens */
+	min-height: 0;
+}
+
+#main table {
+    width: 100%;
+    /* prevents the text from jumbling and forming new lines inside cells */
+    white-space: nowrap;
+}
+
+#table-header {
+    background-color: hsla(239, 29%, 54%);
+    text-transform: uppercase;
+}
+
+/* "<element> > *" is used to recurisvly assign the following styling to the
+   child elements in a given <element> */
+#table-header, #table-content > * {
+    text-align: left;
+}
+
+#table-header th, #table-content td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#table-header th {
+    padding-left: 10px;
+}
+
+#table-content {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

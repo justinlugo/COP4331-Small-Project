@@ -1,9 +1,40 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>View Contacts</title>
+		<title>4331 System</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/contacts.css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	</head>
 	<body>
-        <h1>I have been expecting you</h1>
+		<div id="layout">
+			<div id="header">
+				<button type="button" id="logout">Logout</button>
+			</div>
+			<div id="main">
+				<div id="table-header">
+					<div id="search"><input id="searchBar" placeholder="Search"></div>
+					<button type="button" id="createContact">Add Contact</button>
+					<table>
+						<tr>
+							<th>First</th>
+							<th>Last</th>
+							<th>Email</th>
+							<th>Phone</th>
+						</tr>
+					</table>
+				</div>
+				<div id="table-content">
+					<table></table>
+				</div>
+			</div>
+			<div id="footer">
+				<span class="info">What's this?</span>
+				<a href="https://www.cs.ucf.edu/">UCF 2022</a>
+			</div>
+		</div>
 	</body>
+	<script type="module" src="js/contact-page/contacts.js"></script>
 </html>

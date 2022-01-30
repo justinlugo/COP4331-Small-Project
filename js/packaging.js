@@ -43,6 +43,10 @@ export const newUser = (data) => {
                 }
                 else
                 {
+                    // Save the user's info into a cookie
+                    userId = jsonObject.id;
+                    firstName = jsonObject.firstName;
+                    lastName = jsonObject.lastName;
                     saveCookie();
                     
                     // Move to the next html page to access contacts
@@ -85,6 +89,7 @@ export const login = (data) => {
                 // Show the received JSON for debugging
                 document.getElementById("result").textContent = xhr.responseText;
                 
+                // Saves the users ID
                 userId = jsonObject.id;
 
                 if (userId < 1)
@@ -93,9 +98,10 @@ export const login = (data) => {
                     return;
                 }
 
+                // Saves the users first and last name
                 firstName = jsonObject.firstName;
                 lastName = jsonObject.lastName;
-
+                // Save cookie using ID, first name, and last name.
                 saveCookie();
 
                 // Move to the next html page to access contacts
@@ -116,6 +122,44 @@ function saveCookie()
 {
 	let minutes = 20;
 	let date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
+	date.setTime(date.getTime() + (minutes *60 *1000));	
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
+
+// Cookie functions taken from Professor Leinecker's code.
+export function readCookie()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		
+        if(tokens[0] == "firstName")
+		{
+			firstName = tokens[1];
+		}
+		else if(tokens[0] == "lastName")
+		{
+			lastName = tokens[1];
+		}
+		else if(tokens[0] == "userId")
+		{
+			userId = parseInt(tokens[1].trim());
+		}
+	}
+
+	if(userId < 0)
+	{
+        // If there is no user id stay on index.html
+		// window.location.href = "index.html";
+	}
+	else
+	{
+        // If there is a user id move to the contacts.html
+        window.location.href = "contacts.html";
+		// document.getElementById("userName").textContent = "Logged in as " + firstName + " " + lastName;
+	}
+} 
