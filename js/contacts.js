@@ -20,8 +20,8 @@ let firstName = "";
 let lastName = "";
 
 const emptyJSON = {
-    "FirstName": "First Name",
-    "LastName": "Last Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "email": "Email",
     "phone": "Phone Number"
 };
@@ -60,51 +60,51 @@ function setTableHeight() {
     // JSON object contains an field 'contacts' which is an array of 
     // JSON objects. Each index is an object that contains:
     // "FirstName", "LastName", "email", "phone"
-    const myJSON = {
-        "contacts": [
-          {
-            "FirstName": "Justin",
-            "LastName": "Justin Last",
-            "email": "Justin@email.com",
-            "phone": "123-123-1234"
-          },
-          {
-            "FirstName": "Austin",
-            "LastName": "Austin Last",
-            "email": "Austin@email.com",
-            "phone": "123-123-1234"
-          },
-          {
-            "FirstName": "Sam",
-            "LastName": "Sam Last",
-            "email": "Sam@email.com",
-            "phone": "123-123-1234"
-          },
-          {
-            "FirstName": "Tyler",
-            "LastName": "Tyler Last",
-            "email": "Tyler@email.com",
-            "phone": "123-123-1234"
-          },
-          {
-            "FirstName": "Zach",
-            "LastName": "Zach Last",
-            "email": "Zach@email.com",
-            "phone": "123-123-1234"
-          },
-          {
-            "FirstName": "Victor",
-            "LastName": "Victor Last",
-            "email": "Victor@email.com",
-            "phone": "123-123-1234"
-          }
-        ]
-    };
+    // const myJSON = {
+    //     "contacts": [
+    //       {
+    //         "FirstName": "Justin",
+    //         "LastName": "Justin Last",
+    //         "email": "Justin@email.com",
+    //         "phone": "123-123-1234"
+    //       },
+    //       {
+    //         "FirstName": "Austin",
+    //         "LastName": "Austin Last",
+    //         "email": "Austin@email.com",
+    //         "phone": "123-123-1234"
+    //       },
+    //       {
+    //         "FirstName": "Sam",
+    //         "LastName": "Sam Last",
+    //         "email": "Sam@email.com",
+    //         "phone": "123-123-1234"
+    //       },
+    //       {
+    //         "FirstName": "Tyler",
+    //         "LastName": "Tyler Last",
+    //         "email": "Tyler@email.com",
+    //         "phone": "123-123-1234"
+    //       },
+    //       {
+    //         "FirstName": "Zach",
+    //         "LastName": "Zach Last",
+    //         "email": "Zach@email.com",
+    //         "phone": "123-123-1234"
+    //       },
+    //       {
+    //         "FirstName": "Victor",
+    //         "LastName": "Victor Last",
+    //         "email": "Victor@email.com",
+    //         "phone": "123-123-1234"
+    //       }
+    //     ]
+    // };
 
 
     // For loop of lenght of 'contacts' array inside JSON object
-    for(let i = 0; i < myJSON['contacts'].length; i++)
-        createRow(myJSON['contacts'][i]);
+    // for(let i = 0; i < myJSON['contacts'].length; i++)
+    //     createRow(myJSON['contacts'][i]);
 
     // Says hello to user by name
     const header = document.getElementById("header");
@@ -141,13 +141,13 @@ function createRow(contactJSON) {
     const firstName = document.createElement('td');
     firstName.setAttribute('class', 'firstName');
     // Set the cell to be the first name from the object
-    firstName.textContent = contactJSON.FirstName;
+    firstName.textContent = contactJSON.firstName;
     
     // Creating last name cell.
     const lastName = document.createElement('td');
     lastName.setAttribute('class', 'lastName');
     // Set the cell to be the first name from the object
-    lastName.textContent = contactJSON.LastName;
+    lastName.textContent = contactJSON.lastName;
 
     // Creating email cell.
     const email = document.createElement('td');
@@ -373,6 +373,83 @@ function rowToObject(element) {
 
     // Return newContact object
     return newContact;
+}
+
+// Using the search bar.
+document.addEventListener('input', (e) => {
+    
+    // Every time there is an event using the search bar
+    if (e.target.id == 'searchBar') {
+        // Send text in search bar to search
+        searchContacts();
+    }
+});
+
+// Searches the contacts of the user
+function searchContacts() {
+    // Get inputs and convert to JSON
+    // Get the row
+    const searchBar = document.getElementById("searchBar");
+    console.log(searchBar);
+    // Get the value from the search bar
+    const search = searchBar.value;
+    console.log(search);
+    
+    // Create empty object called new contact
+    const newSearch = new Object();
+    // Individually grab each elemnt from the row to put in object field
+    newSearch.search = search.trim();
+    
+    // Check to make sure the user Id is right
+    if (userId < 1) {
+        // User Id is wrong
+        console.log("user Id is incorrect");
+        // End the search since user id isnt right
+        return;
+    }
+    newSearch.userId = userId;
+
+    // Convert the data to JSON
+    const myJSON = JSON.stringify(newSearch);
+    console.log(myJSON);
+
+    // HTTP post for sending JSON login info.
+
+    // Setup the HTTP request to send to the API endpoint
+    let url = urlBase + '/SearchContact.' + ext;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        // After any change happens 
+        xhr.onreadystatechange = function()
+        {
+            // When the send is successful take the response and store in jsonObject
+            if (this.readyState == 4 && this.status == 200)
+            {
+                let jsonObject = JSON.parse (xhr.responseText);
+
+                // Show the received JSON for debugging
+                // document.getElementById("result").textContent = xhr.responseText;
+                
+                // If no errors then adding of user was success
+                // if (jsonObject.error == "") {
+                    // Loop through the results and create rows
+                    // For loop of lenght of 'contacts' array inside JSON object
+                    for(let i = 0; i < jsonObject['contacts'].length; i++)
+                        createRow(jsonObject['contacts'][i]);
+                // }
+            }
+        };
+        // Send the JSON
+        xhr.send(myJSON);
+    }
+    catch(err)
+    {
+        // If there's an error display it
+        // document.getElementById("result").textContent = err.message;
+    }
 }
 
 // Cookie functions taken from professor's code
