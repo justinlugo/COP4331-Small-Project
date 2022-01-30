@@ -3,6 +3,7 @@ import * as packaging from './packaging.js';
 main.onload = packaging.readCookie();
 
 const menu = document.getElementById('menu');
+
 // Signup button is clicked.
 menu.querySelector('#signup').addEventListener('click', () => {
     const formSignup = menu.querySelector('#form-signup');
@@ -83,7 +84,7 @@ menu.querySelector('#signup').addEventListener('click', () => {
         result.setAttribute('id', 'result');
         menu.appendChild(result);
     } 
-})
+});
 
 // Existing user button is clicked.
 menu.querySelector('#existing').addEventListener('click', () => {
@@ -131,10 +132,7 @@ menu.querySelector('#existing').addEventListener('click', () => {
         result.setAttribute('id', 'result');
         menu.appendChild(result);
     }
-})
-
-// Since the submit and login buttons are dynamically created, we will need to 
-// use "event delegation" to handle these elements when interacted with.
+});
 
 // Submit button is clicked, in the signup form.
 document.addEventListener('click', (e) => {

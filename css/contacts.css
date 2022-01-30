@@ -34,6 +34,11 @@
     white-space: nowrap;
 }
 
+#table-header {
+    background-color: hsla(239, 29%, 54%);
+    text-transform: uppercase;
+}
+
 /* "<element> > *" is used to recurisvly assign the following styling to the
    child elements in a given <element> */
 #table-header, #table-content > * {
@@ -41,7 +46,8 @@
 }
 
 #table-header th, #table-content td {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #table-header th {

@@ -1,21 +1,27 @@
 @import url('./styles.css');
 :root {
 	--section-padding: 22px;
+	--color-wall: hsl(250, 3%, 65%);
+	--max-desktop-width: 800px;
+}
+
+body {
+	background-color: var(--color-wall);
 }
 
 /* styling for the main page */
 #layout {
 	display: grid; 
-  	grid-template-columns: 1fr 480px 1fr; 
+  	grid-template-columns: 40vw 1fr 480px 1fr; 
   	grid-template-rows: .1fr .8fr .1fr; 
   	gap: 0px 0px; 
   	grid-template-areas:
-	  	"header header header" 
-    	". main ."
-		". footer ."; 
+	  	"push header header header" 
+    	"push . main ."
+		"push . footer ."; 
 	height: 100vh;
-	background-color: var(--color-accent-light);
 	color: var(--color-accent-dark);
+	position: relative;
 }
 
 #header {
@@ -28,6 +34,7 @@
 	max-width: 480px;
 	min-width: 320px;
 	text-align: center;
+	border-radius: 30px;
 }
 
 #main h1 {
@@ -57,7 +64,12 @@
 }
 
 #menu button:hover {
-	background-color: var(--color-main);
+	background-color: var(--color-accent-dark);
+	color: var(--color-wall);
+}
+
+#existing {
+	background-color: hsla(239, 50%, 54%, .3);
 }
 
 #menu form {
@@ -77,4 +89,16 @@
 	padding-bottom: var(--section-padding);
 	width: 25%;
 	position: sticky;
+}
+
+#bg {
+	background-color: var(--color-wall);
+	background-image: url(/public/chair.jpg);
+	background-attachment: fixed;
+	background-size: 1366px;
+	min-width: 100vw;
+	min-height: 100vh;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: 0;
 }

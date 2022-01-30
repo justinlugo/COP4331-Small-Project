@@ -34,11 +34,12 @@
 	-moz-user-select: none; 	 /* Firefox */
 	-ms-user-select: none; 		 /* Edge */
 	user-select: none;
+
+	font-family:'Courier New', Courier, monospace;
 }
 
 body {
-	/* prevents scrollbar */
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 /* Enable users highlight their text in input fields */
