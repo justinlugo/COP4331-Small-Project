@@ -1,4 +1,23 @@
-/* primary style sheets used across the app */
+/* primary styleing used across the app */
+
+/* ":root" is a way to declare variables inside CSS for concistant syling */
+:root {
+	/* Voted Colour of the Year 2022 */
+	
+
+	/* Colour Pallete */
+	--color-main:              hsl(239, 29%, 54%);   /*#6667ab*/
+	--color-accent-dark:       hsl(252, 6%, 17%);    /*#29282d*/
+	--color-accent-gray:       hsl(320, 3%, 37%);    /*#625c60*/
+	--color-accent-light:      hsl(30, 22%, 93%);    /*#f1ede9*/
+
+	/* --color-accent-light-tint: #aea392; */
+	
+}
+
+::placeholder {
+	color: var(--color-accent-dark);
+}
 
 /* With just "*", we are selecting ALL elements and giving it the following 
    properties.
@@ -29,4 +48,24 @@ input {
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
+	background-color: hsla(239, 29%, 84%, .3);
+	border-top: 2px solid var(--color-main);
+	padding-left: 10px;
+}
+
+button {
+	background-color: var(--color-main);
+}
+
+#footer {
+	grid-area: footer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	justify-content: center;
+}
+
+#footer a {
+	font-size: .8em;
 }

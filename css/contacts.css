@@ -1,5 +1,6 @@
-/* styling for the contacts page */
+@import url('./styles.css');
 
+/* styling for the contacts page */
 #layout {
 	display: grid; 
   	grid-template-columns: 1fr 90vw 1fr; 
@@ -11,6 +12,8 @@
 		". footer ."; 
 	height: 100vh;
     width: 100vw;
+	background-color: var(--color-accent-light);
+	color: var(--color-accent-dark);
 }
 
 #header {
@@ -49,18 +52,4 @@
     overflow: auto;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-#footer {
-	grid-area: footer;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	justify-content: center;
-	color: gray;
-}
-
-#footer a {
-	font-size: .8em;
 }

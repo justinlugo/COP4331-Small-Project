@@ -1,13 +1,25 @@
+@import url('./styles.css');
+:root {
+	--section-padding: 22px;
+}
+
 /* styling for the main page */
 #layout {
 	display: grid; 
   	grid-template-columns: 1fr 480px 1fr; 
-  	grid-template-rows: .9fr .1fr; 
+  	grid-template-rows: .1fr .8fr .1fr; 
   	gap: 0px 0px; 
-  	grid-template-areas: 
+  	grid-template-areas:
+	  	"header header header" 
     	". main ."
 		". footer ."; 
 	height: 100vh;
+	background-color: var(--color-accent-light);
+	color: var(--color-accent-dark);
+}
+
+#header {
+	grid-area: header;
 }
 
 /* max and min widths are important to keep it "mobile friendly" */
@@ -24,26 +36,28 @@
 
 #main span {
 	font-size: 15px;
-	color: gray;
 }
 
 #title {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
+	position:sticky;
 }
 
 #menu {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
 }
 
 #menu button {
 	height: 35px;
 	width: 320px;
+	text-transform: uppercase;
+	font-size: 1em;
 }
 
 #menu button:hover {
-	background-color: #1E90FF;
+	background-color: var(--color-main);
 }
 
 #menu form {
@@ -54,19 +68,13 @@
 
 #menu input {
 	height: 35px;
-	width: 320px;
-}
-
-#footer {
-	grid-area: footer;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	justify-content: center;
-	color: gray;
-}
-
-#footer a {
+	width: 305px;
 	font-size: .8em;
+}
+
+#pegasus {
+	padding-top: var(--section-padding);
+	padding-bottom: var(--section-padding);
+	width: 25%;
+	position: sticky;
 }
