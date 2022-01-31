@@ -72,8 +72,14 @@ function createRow(contact) {
     tableContent.appendChild(row);
 }
 
+// (function() {
+//   // Read the cookie if there is one
+//   // readCookie();
+// })();
+
+// readCookie
 // Cookie functions taken from Professor Leinecker's code.
-function readCookie()
+(function()
 {
 	userId = -1;
 	let data = document.cookie;
@@ -105,13 +111,12 @@ function readCookie()
 	else
 	{
 		// document.getElementById("userName").textContent = "Logged in as " + firstName + " " + lastName;
+    // Create a greeting for the user.
+    const greeting = document.createElement('span');
+    greeting.textContent = `Hello, ${firstName} ${lastName}`;
+    header.appendChild(greeting);
 	}
-
-  // Create a greeting for the user.
-  const greeting = document.createElement('span');
-  greeting.textContent = `Hello, ${firstName} ${lastName}`;
-  header.appendChild(greeting);
-}
+})();
 
 export function registerContact() {
   console.log("Hello")
@@ -208,14 +213,13 @@ export function searchContacts() {
   // Get inputs and convert to JSON
   // Get the row
   const searchBar = document.getElementById("searchBar");
-  console.log(searchBar);
+  
   // Get the value from the search bar
   const search = searchBar.value;
-  console.log(search);
   
   // Create empty object called new contact
   const newSearch = new Object();
-  // Individually grab each elemnt from the row to put in object field
+  // Remove excess whitespace
   newSearch.search = search.trim();
   
   // Check to make sure the user Id is right
@@ -226,6 +230,9 @@ export function searchContacts() {
       return;
   }
   newSearch.userId = userId;
+
+  // Clear the table
+  clearTable();
 
   // Convert the data to JSON
   const myJSON = JSON.stringify(newSearch);
@@ -255,8 +262,11 @@ export function searchContacts() {
               // if (jsonObject.error == "") {
                   // Loop through the results and create rows
                   // For loop of lenght of 'contacts' array inside JSON object
-                  for(let i = 0; i < jsonObject['contacts'].length; i++)
-                      createRow(jsonObject['contacts'][i]);
+                  for (let i = 0; i < jsonObject['contacts'].length; i++) {
+                    updateTable(jsonObject['contacts'][i]);
+                    // createRow(jsonObject['contacts'][i]);
+                  }
+
               // }
           }
       };
@@ -270,6 +280,55 @@ export function searchContacts() {
   }
 }
 
+// Function to update the table rows, makes sure duplicates are not printed
+function updateTable(contactJSON) {
+  // Get the table element and length
+  const table = document.getElementById("table-content").children;
+  const tableLength = table[0].children.length;
+
+  // If theres nothing in the table then add the contact
+  if (tableLength == 0) {
+    createRow(contactJSON);
+    return;
+  }
+
+  // Some console logs for accessing parts of the table
+  // console.log(table);
+  // console.log(table[0].children.length);
+  // console.log("check rows");
+  // console.log(table[0].children);
+  // console.log(table[0].rows[0].cells.length);
+  // console.log(table[0].rows[0].cells[4].textContent);
+  
+  // Loop through the table checking if the contact to be added is in the table
+  for (let i = 0; i < tableLength; i++) {
+    // Get the contact id of the contact in the current row
+    const contactId = table[0].rows[i].cells[4].textContent;
+
+    // If the contact id is found quit since it is already in the table
+    if (contactId == contactJSON.id) {
+      return;
+    }
+  }
+
+  // After checking the contact is not in the table then add to table
+  createRow(contactJSON);
+}
+
+// Function to clear the table
+function clearTable() {
+  // Get the table element and length
+  const table = document.getElementById("table-content").children;
+  const tableLength = table[0].children.length;
+
+  // Loop through the table
+  for (let i = 0; i < tableLength; i++) {
+    // Delete the top row as many times as in the table
+    const row = table[0].rows[0];
+    row.remove();
+  }
+}
+
 // When logout button is clicked.
 const logOutBtn = document.getElementById('logout');
 logOutBtn.addEventListener('click', () => {
@@ -279,65 +338,3 @@ logOutBtn.addEventListener('click', () => {
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 });
-
-// DEBUGGING FUNCTION
-(function() {
-  // Read the cookie if there is one
-  // readCookie();
-  
-  // JSON which contains an array of objects assigned as "contacts".
-  const myJSON = {
-      "contacts": [
-        {
-          "FirstName": "Justin",
-          "LastName": "Justin Last",
-          "email": "Justin@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Austin",
-          "LastName": "Austin Last",
-          "email": "Austin@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Sam",
-          "LastName": "Sam Last",
-          "email": "Sam@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Tyler",
-          "LastName": "Tyler Last",
-          "email": "Tyler@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Zach",
-          "LastName": "Zach Last",
-          "email": "Zach@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Victor",
-          "LastName": "Victor Last",
-          "email": "Victor@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        }
-      ]
-  };
-  // For loop of length of contacts, and for a given multiplyer, do that
-  // contact-length*n times. This helps to populate the table.
-  const multiplyer = 8;
-  for (let i = 0; i < multiplyer; i++) {
-      for(let j = 0; j < myJSON.contacts.length; j++)
-          createRow(myJSON.contacts[j]);
-  }
-})();
-// DEBUGGING FUNCTION
