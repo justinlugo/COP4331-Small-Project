@@ -137,8 +137,6 @@ export function registerContact() {
   const myJSON = JSON.stringify(data);
   console.log(myJSON);
 
-  // HTTP post for sending JSON login info.
-
   // Setup the HTTP request to send to the API endpoint
   let url = urlBase + '/AddContact.' + ext;
   let xhr = new XMLHttpRequest();
@@ -161,6 +159,8 @@ export function registerContact() {
               if (jsonObject.error == "") {
                   // Since user was added remove the input row.
                   rowData.remove();
+                  // Redisplay the table with the new contact
+                  searchContacts();
               }
           }
       };
@@ -342,6 +342,44 @@ function clearTable() {
     const row = table[0].rows[0];
     row.remove();
   }
+}
+
+// Delete Contact
+export function deleteContact(rowElement) {
+  
+  // Create empty object called remove contact
+  const removeContact = new Object();
+  
+  // Send the Id of the contact to be removed
+  removeContact.id = rowElement.cells[4].textContent;
+
+  // Convert the data to JSON
+  const myJSON = JSON.stringify(removeContact);
+
+  // Setup the HTTP request to send to the API endpoint
+  let url = urlBase + '/DeleteContact.' + ext;
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try
+  {
+      // After any change happens 
+      xhr.onreadystatechange = function()
+      {
+          // When the send is successful take the response and store in jsonObject
+          if (this.readyState == 4 && this.status == 200)
+          {
+              // Now that the delete is done confirm contact has been deleted
+          }
+      };
+      // Send the JSON
+      xhr.send(myJSON);
+  }
+  catch(err)
+  {
+      // If there's an error display it
+      // document.getElementById("result").textContent = err.message;
+  }  
 }
 
 // When logout button is clicked.
