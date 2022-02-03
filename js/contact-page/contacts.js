@@ -12,6 +12,9 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+// Limit of how many searches can be shown
+let limit = 25;
+
 // Watches the height of main, and will dynamically set the height of the table.
 ui.heightObserver.observe(main);
 
@@ -115,6 +118,9 @@ function createRow(contact) {
     const greeting = document.createElement('span');
     greeting.textContent = `Hello, ${firstName} ${lastName}`;
     header.appendChild(greeting);
+
+    // Initial search when page loads to show user's database
+    searchContacts();
 	}
 })();
 
@@ -238,8 +244,6 @@ export function searchContacts() {
   const myJSON = JSON.stringify(newSearch);
   console.log(myJSON);
 
-  // HTTP post for sending JSON login info.
-
   // Setup the HTTP request to send to the API endpoint
   let url = urlBase + '/SearchContact.' + ext;
   let xhr = new XMLHttpRequest();
@@ -258,16 +262,27 @@ export function searchContacts() {
               // Show the received JSON for debugging
               // document.getElementById("result").textContent = xhr.responseText;
               
-              // If no errors then adding of user was success
-              // if (jsonObject.error == "") {
-                  // Loop through the results and create rows
-                  // For loop of lenght of 'contacts' array inside JSON object
-                  for (let i = 0; i < jsonObject['contacts'].length; i++) {
-                    updateTable(jsonObject['contacts'][i]);
-                    // createRow(jsonObject['contacts'][i]);
-                  }
+              // Check the length of the received objects and loop through a max of the limit
+              // Sets the size of the loop to create rows
+              let showSize = 0;
+              if (jsonObject.hasOwnProperty('contacts'))
+              {
+                if (jsonObject['contacts'].length  < limit)
+                {
+                  showSize = jsonObject['contacts'].length;
+                }
+                else 
+                {
+                  showSize = limit;
+                }
+              }
 
-              // }
+              // For loop of lenght of 'contacts' array inside JSON object
+              for (let i = 0; i < showSize; i++) 
+              {
+                updateTable(jsonObject['contacts'][i]);
+                // createRow(jsonObject['contacts'][i]);
+              }
           }
       };
       // Send the JSON
