@@ -7,6 +7,15 @@ const menu = document.getElementById('menu');
 // When the page loads read cookie
 main.onLoad = packaging.readCookie();
 
+function createInputField(type, name, placeholder) {
+    const inputField = document.createElement('input');
+    inputField.setAttribute('type', type);
+    inputField.setAttribute('name', name);
+    inputField.setAttribute('placeholder', placeholder);
+
+    return inputField;
+}
+
 // Signup button is clicked.
 menu.querySelector('#signup').addEventListener('click', () => {
     const formSignup = menu.querySelector('#form-signup');
@@ -17,56 +26,18 @@ menu.querySelector('#signup').addEventListener('click', () => {
    
     // Check if signup has already been clicked.
     if (formSignup == null) {
-        // Create a wrapper for the form and children.
         const wrapper = document.createElement('div');
         wrapper.setAttribute('id', 'form-signup');
 
-        // Creating a form.
         const form = document.createElement('form');
         form.setAttribute('method', 'post');
-        
-        // A field for the first name.
-        const inputFirst = document.createElement('input');
-        inputFirst.setAttribute('type', 'text');
-        inputFirst.setAttribute('name', 'firstName');
-        inputFirst.setAttribute('placeholder', "First Name");
 
-        // A field for the last name.
-        const inputLast = document.createElement('input');
-        inputLast.setAttribute('type', 'text');
-        inputLast.setAttribute('name', 'lastName');
-        inputLast.setAttribute('placeholder', "Last Name");
+        form.appendChild(createInputField('text',     'firstName', 'First Name'));
+        form.appendChild(createInputField('text',     'lastName',  'Last Name'));
+        form.appendChild(createInputField('text',     'login',     'User Name'));
+        form.appendChild(createInputField('email',    'email',     'Email'));
+        form.appendChild(createInputField('password', 'password',  'Password'));
 
-        // Email
-        const inputEmail = document.createElement('input');
-        // inputEmail.setAttribute('type', 'text');
-        // Input of type email is possible with HTML5 it might be useful for
-        // error checking in the future.
-        inputEmail.setAttribute('type', 'email');
-        inputEmail.setAttribute('name', 'email');
-        inputEmail.setAttribute('placeholder', "Email");
-
-        // Username
-        const inputUser = document.createElement('input');
-        inputUser.setAttribute('type', 'text');
-        inputUser.setAttribute('name', 'login');
-        inputUser.setAttribute('placeholder', "Username");
-
-        // Password
-        const inputPass = document.createElement('input');
-        inputPass.setAttribute('type', 'password');
-        inputPass.setAttribute('name', 'password');
-        inputPass.setAttribute('placeholder', "Password");
-
-        // Now with all these elements created, we need to append them to the form.
-        // form.appendChild(inputName);
-        form.appendChild(inputFirst);
-        form.appendChild(inputLast);
-        form.appendChild(inputUser);
-        form.appendChild(inputPass);
-        form.appendChild(inputEmail);
-        
-        // Creating the submit button.
         const submitBtn = document.createElement('button');
         submitBtn.setAttribute('id', 'submit');
         submitBtn.textContent = "Submit";
@@ -75,9 +46,8 @@ menu.querySelector('#signup').addEventListener('click', () => {
         wrapper.appendChild(form);
         wrapper.appendChild(submitBtn);
 
-        // Append our dynamically created elements to the menu.
         menu.appendChild(wrapper);
-
+        
         // if result span is active, remove it.
         let result = menu.querySelector('#result');
         if (result != null) result.remove();
@@ -104,23 +74,12 @@ menu.querySelector('#existing').addEventListener('click', () => {
         const form = document.createElement('form');
         form.setAttribute('method', 'post');
 
-        const inputUser = document.createElement('input');
-        inputUser.setAttribute('type', 'text');
-        // Needed to change the name to login for proper API
-        inputUser.setAttribute('name', 'login');
-        inputUser.setAttribute('placeholder', "Username");
-
-        const inputPass = document.createElement('input');
-        inputPass.setAttribute('type', 'password');
-        inputPass.setAttribute('name', 'password');
-        inputPass.setAttribute('placeholder', "Password");
-
         const loginBtn = document.createElement('button');
         loginBtn.setAttribute('id', 'login');
         loginBtn.textContent = "Login";
 
-        form.appendChild(inputUser);
-        form.appendChild(inputPass);
+        form.appendChild(createInputField('text'    , 'login'   , 'Username'));
+        form.appendChild(createInputField('password', 'password', 'Password'));
         wrapper.appendChild(form);
         wrapper.appendChild(loginBtn);
 
@@ -199,3 +158,4 @@ document.addEventListener('click', (e) => {
         packaging.login(data);
     }
 });
+
