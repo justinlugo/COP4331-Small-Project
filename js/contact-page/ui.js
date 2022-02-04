@@ -112,7 +112,8 @@ function confirmInput(array) {
 
 
     let i = 0;
-    for (const property in inputPackage) {
+    for (const property in inputPackage) 
+    {
         console.log(array[i]);
         console.log(array[i].children[0]);
 
@@ -185,6 +186,15 @@ function inputs_toCells(array) {
             console.log(packagedInput);
             
             inputs_toCells(rowInputs);
+
+            // Send the edited contact to the database
+            const tableRow = e.target.parentNode.parentNode;
+            console.log(tableRow);
+            contact.updateContact(tableRow);
+
+            // Convert the confirm button into a "edit button".
+            e.target.className = "editBtn";
+            e.target.textContent = "E";
         }
         // Remove Contact is clicked.
         else if (e.target.className == 'removeBtn') {
