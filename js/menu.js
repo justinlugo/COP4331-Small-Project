@@ -1,10 +1,7 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
-main.onload = packaging.readCookie();
 
 const menu = document.getElementById('menu');
-
-// When the page loads read cookie
 main.onLoad = packaging.readCookie();
 
 function createInputField(type, name, placeholder) {
@@ -158,4 +155,3 @@ document.addEventListener('click', (e) => {
         packaging.login(data);
     }
 });
-

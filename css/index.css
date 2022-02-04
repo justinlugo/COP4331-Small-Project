@@ -13,7 +13,7 @@ body {
 #layout {
 	display: grid; 
   	grid-template-columns: 40vw 1fr 480px 1fr; 
-  	grid-template-rows: .1fr .8fr .1fr; 
+  	grid-template-rows: .05fr .9fr .05fr; 
   	gap: 0px 0px; 
   	grid-template-areas:
 	  	"push header header header" 
@@ -38,11 +38,12 @@ body {
 }
 
 #main h1 {
-	font-size: 5.6em;
+	font-size: 6em;
 }
 
 #main span {
 	font-size: 15px;
+	width: 500px;
 }
 
 #title {
@@ -53,7 +54,7 @@ body {
 
 #menu {
 	padding-top: var(--section-padding);
-	padding-bottom: var(--section-padding);
+	padding-bottom: 35px;
 }
 
 #menu button {
@@ -66,11 +67,15 @@ body {
 
 #menu button:hover {
 	background-color: var(--color-accent-dark);
-	color: var(--color-wall);
+	color: white;
+}
+
+#signup {
+	background-color: hsl(239, 45%, 60%);
 }
 
 #existing {
-	background-color: hsla(239, 50%, 54%, .3);
+	background-color: hsla(239, 50%, 54%, .2);
 }
 
 #menu form {
@@ -90,6 +95,14 @@ body {
 	padding-bottom: var(--section-padding);
 	width: 25%;
 	position: sticky;
+	background-color: hsla(30, 22%, 93%);
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 300px;
+}
+
+#footer {
+	grid-area: footer;
 }
 
 #bg {
@@ -102,4 +115,40 @@ body {
 	position: absolute;
 	background-repeat: no-repeat;
 	background-position: 0;
+}
+
+@media screen and (max-width: 1280px) {
+	#layout {
+		display: grid; 
+  		grid-template-columns: 1fr 480px 1fr; 
+  		grid-template-rows: .05fr .9fr .05fr; 
+  		gap: 0px 0px; 
+  		grid-template-areas:
+		  	"header header header" 
+    		". main ."
+			". footer ."; 
+		height: 100vh;
+		color: var(--color-accent-dark);
+		position: relative;
+		background-color: hsla(252, 6%, 8%, 0.5);
+		color: var(--color-accent-light);
+	}
+
+	#title span {
+		display: none;
+	}
+
+	#pegasus {
+		background-color: hsla(30, 22%, 93%);
+		padding-left: 30px;
+		padding-right: 30px;
+		border-radius: 300px;
+	}
+
+	#bg {
+		opacity: 1;
+		filter: blur(8px);
+	}
+
+
 }
