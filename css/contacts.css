@@ -1,19 +1,20 @@
 @import url('./styles.css');
-
 /* styling for the contacts page */
+
 #layout {
 	display: grid; 
-  	grid-template-columns: 1fr 90vw 1fr; 
+  	grid-template-columns: 300px 1fr .05fr; 
   	grid-template-rows: .1fr .8fr .1fr; 
   	gap: 0px 0px; 
   	grid-template-areas: 
-        ". header ."
-    	". main ."
-		". footer ."; 
+        "header header header"
+    	"sidebar main ."
+		"sidebar footer ."; 
 	height: 100vh;
     width: 100vw;
-	background-color: var(--color-accent-light);
+    background-color: rgba(98, 92, 96);
 	color: var(--color-accent-dark);
+    background-color: var(--color-main);
 }
 
 #header {
@@ -32,10 +33,17 @@
     width: 100%;
     /* prevents the text from jumbling and forming new lines inside cells */
     white-space: nowrap;
+    table-layout: fixed;
+}
+
+#sidebar {
+    grid-area: sidebar;
+    background-color: aqua;
 }
 
 #table-header {
-    background-color: hsla(239, 29%, 54%);
+    color: var(--color-accent-light);
+    background-color: var(--color-main);
     text-transform: uppercase;
 }
 
@@ -50,12 +58,17 @@
     padding-bottom: 10px;
 }
 
-#table-header th {
-    padding-left: 10px;
-}
-
 #table-content {
-    overflow: auto;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+#table-content td {
+    border-bottom: solid 1px rgba(241, 237, 233, .2);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#table-content tr:hover {
+    background-color: rgba(241, 237, 233, .2);
 }

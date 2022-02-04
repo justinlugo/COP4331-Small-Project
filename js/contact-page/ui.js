@@ -1,5 +1,7 @@
 import * as contact from './contacts.js';
+import * as tableCreate from './tableCreate.js';
 
+const tableHeader = document.getElementById('table-header');
 const tableContent = document.getElementById('table-content');
 const emptyJSON = {
     "FirstName": "First Name",
@@ -9,7 +11,7 @@ const emptyJSON = {
 };
 
 // Watches an element, although this should specifally be used for observing the 
-// height of main.
+// height of main to dynamically set the tableHeight based on window height.
 const heightObserver = new ResizeObserver(selection => {
     for (let entry of selection) {
         const entryHeight = entry.contentRect.height;
@@ -28,58 +30,20 @@ function setTableHeight(height) {
 
 // Creates an input row and adds to the table from JSON object
 function createInputRow(inputJSON) {
-    const row = document.createElement('tr');
+    const row = tableCreate.inputRow(inputJSON);
     row.setAttribute('id', 'rowInput');
-
-    const firstName = document.createElement('td');
-    firstName.setAttribute('class', 'firstName');
-    // Set the cell to have an input
-    const inputFirst = document.createElement("input");
-    inputFirst.setAttribute('type', 'text');
-    inputFirst.placeholder = inputJSON.FirstName;
-    firstName.appendChild(inputFirst);
+    tableContent.appendChild(row);
     
-    const lastName = document.createElement('td');
-    lastName.setAttribute('class', 'lastName');
-    const inputLast = document.createElement("input");
-    inputLast.setAttribute('type', 'text');
-    inputLast.placeholder = inputJSON.LastName;
-    lastName.appendChild(inputLast);
-  
-    const email = document.createElement('td');
-    email.setAttribute('class', 'email');
-    const inputEmail = document.createElement("input");
-    inputEmail.setAttribute('type', 'email');
-    inputEmail.placeholder = inputJSON.email;
-    email.appendChild(inputEmail);
-
-    const phone = document.createElement('td');
-    phone.setAttribute('class', 'phone');
-    const inputPhone = document.createElement("input");
-    inputPhone.setAttribute('type', 'tel');
-    inputPhone.placeholder = inputJSON.phone;
-    phone.appendChild(inputPhone);
-  
+    // NOTE: FIX LATER, button messes up table formatting.
     const submitContact = document.createElement('td');
-    // Make the button take up 2 td's since other lines will have 2?
-    // ?????
-    submitContact.setAttribute('colspan', '2');
     submitContact.setAttribute('class', 'submitBtn');
-    // Create submit button
     const submitBtn = document.createElement('button');
     submitBtn.setAttribute('id', 'submitContact');
     submitBtn.textContent = "Submit";
     // Attach button to cell
     submitContact.appendChild(submitBtn);
-  
-    // Attach all the cells to the row
-    row.appendChild(firstName);
-    row.appendChild(lastName);
-    row.appendChild(email);
-    row.appendChild(phone);
+
     row.appendChild(submitContact);
-  
-    // Attach the row to the top of table
     tableContent.getElementsByTagName('table')[0].prepend(row);
 }
 
@@ -107,7 +71,7 @@ function confirmInput(array) {
         lastName:   '',
         email:      '',
         phone:      '',
-        contactId:''
+        contactId:  ''
     };
 
 
