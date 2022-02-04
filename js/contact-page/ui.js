@@ -21,7 +21,6 @@ const heightObserver = new ResizeObserver(selection => {
 
 // Set table height dynamically to the height of #main.
 function setTableHeight(height) {
-    const tableHeader = document.getElementById('table-header');
     const headerHeight = tableHeader.clientHeight;
     // The header is one element that is "pushing down" the table contnet.
     // To negate this, we subtract the headers height from the total (main height).

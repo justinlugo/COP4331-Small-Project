@@ -10,11 +10,18 @@
 	</head>
 	<body>
 		<div id="layout">
-			<div id="header"></div>
+			<div id="header">
+				<div>
+					<span id="contactCount">Contacts</span>
+					<button type="button" id="createContact">Add Contact</button>
+				</div>
+				<div id="search">
+					<input id="searchBar" placeholder="Search">
+					<button type="button" id="logout">Logout</button>
+				</div>
+			</div>
 			<div id="main">
 				<div id="table-header">
-					<div id="search"><input id="searchBar" placeholder="Search"></div>
-					<button type="button" id="createContact">Add Contact</button>
 					<table>
 						<tr>
 							<th>First</th>
@@ -30,7 +37,6 @@
 			</div>
 			<div id="sidebar"></div>
 			<div id="footer">
-				<button type="button" id="logout">Logout</button>
 				<span class="info">What's this?</span>
 				<a href="https://www.cs.ucf.edu/">UCF 2022</a>
 			</div>
