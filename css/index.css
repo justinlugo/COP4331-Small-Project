@@ -20,7 +20,7 @@ body {
     	"push . main ."
 		"push . footer ."; 
 	height: 100vh;
-	color: var(--color-accent-dark);
+	background-color: hsla(252, 6%, 8%, 0.2);
 	position: relative;
 }
 
