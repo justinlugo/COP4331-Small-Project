@@ -1,6 +1,7 @@
 // importing the functions from packaging.js as a library.
 import * as packaging from './packaging.js';
 
+const main = document.getElementById('main');
 const menu = document.getElementById('menu');
 main.onLoad = packaging.readCookie();
 
@@ -9,6 +10,7 @@ function createInputField(type, name, placeholder) {
     inputField.setAttribute('type', type);
     inputField.setAttribute('name', name);
     inputField.setAttribute('placeholder', placeholder);
+    inputField.required = true;
 
     return inputField;
 }
@@ -21,6 +23,8 @@ menu.querySelector('#signup').addEventListener('click', () => {
     // to remove the login form dynamically.
     if (formLogin != null) formLogin.remove();
    
+    document.getElementById('title').getElementsByTagName('span')[0].textContent = '';
+
     // Check if signup has already been clicked.
     if (formSignup == null) {
         const wrapper = document.createElement('div');
@@ -65,6 +69,9 @@ menu.querySelector('#existing').addEventListener('click', () => {
     if (formSignup != null) formSignup.remove();
 
     if (loginCheck == null) {
+
+        document.getElementById('title').getElementsByTagName('span')[0].textContent = '';
+
         const wrapper = document.createElement('div');
         wrapper.setAttribute('id', 'form-login');
 

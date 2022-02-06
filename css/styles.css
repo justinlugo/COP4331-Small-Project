@@ -36,12 +36,15 @@
 	user-select: none;
 
 	font-family:'Courier New', Courier, monospace;
-
-	-webkit-appearance: none;
 }
 
 body {
 	overflow-x: hidden;
+}
+
+#header {
+	background-color: hsl(239, 45%, 60%);
+	display: flex;
 }
 
 /* Enable users highlight their text in input fields */
@@ -51,8 +54,7 @@ input {
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
-	background-color: hsla(239, 29%, 84%, .3);
-	border-top: 2px solid var(--color-main);
+	background-color: hsla(30, 22%, 100%, .75);
 	padding-left: 10px;
 }
 
@@ -65,8 +67,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	text-align: center;
-	justify-content: center;
+	align-items: center;
 }
 
 #footer a {

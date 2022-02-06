@@ -12,11 +12,11 @@ body {
 /* styling for the main page */
 #layout {
 	display: grid; 
-  	grid-template-columns: 40vw 1fr 480px 1fr; 
+  	grid-template-columns: 40vw 1fr 420px 1fr; 
   	grid-template-rows: .05fr .9fr .05fr; 
   	gap: 0px 0px; 
   	grid-template-areas:
-	  	"push header header header" 
+	  	"header header header header" 
     	"push . main ."
 		"push . footer ."; 
 	height: 100vh;
@@ -30,39 +30,53 @@ body {
 
 /* max and min widths are important to keep it "mobile friendly" */
 #main { 
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	grid-area: main;
-	max-width: 480px;
+	max-width: 420px;
 	min-width: 320px;
 	text-align: center;
 	border-radius: 30px;
 }
 
 #main h1 {
-	font-size: 6em;
+	font-size: 5.3em;
 }
 
 #main span {
 	font-size: 15px;
-	width: 500px;
 }
 
 #title {
 	padding-top: var(--section-padding);
 	padding-bottom: var(--section-padding);
 	position:sticky;
+	font-weight: 600;
+	color: var(--color-accent-light);
+}
+
+#title span {
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	display: block;
 }
 
 #menu {
-	padding-top: var(--section-padding);
 	padding-bottom: 35px;
 }
 
 #menu button {
-	height: 35px;
-	width: 320px;
+	height: 45px;
+	width: 100%;
 	text-transform: uppercase;
 	font-size: 1em;
-	color: var(--color-accent-light)
+	font-weight: 600;
+	color: var(--color-accent-light);
+	margin: 3px;
+	border-radius: 5px;
+	border:1px solid hsla(30, 22%, 93%, .75)
 }
 
 #menu button:hover {
@@ -74,7 +88,7 @@ body {
 	background-color: hsl(239, 45%, 60%);
 }
 
-#existing {
+#existing, #login {
 	background-color: hsla(239, 50%, 54%, .2);
 }
 
@@ -85,9 +99,14 @@ body {
 }
 
 #menu input {
+	margin: 3px;
 	height: 35px;
-	width: 305px;
+	width: 93%;
+	margin-left: 5px;
+	padding-right: 0;
 	font-size: .8em;
+	border-radius: 5px;
+	border:1px solid hsla(252, 6%, 8%, 0.37);
 }
 
 #pegasus {
@@ -120,7 +139,7 @@ body {
 @media screen and (max-width: 1280px) {
 	#layout {
 		display: grid; 
-  		grid-template-columns: 1fr 480px 1fr; 
+  		grid-template-columns: 1fr 420px 1fr; 
   		grid-template-rows: .05fr .9fr .05fr; 
   		gap: 0px 0px; 
   		grid-template-areas:
@@ -134,8 +153,10 @@ body {
 		color: var(--color-accent-light);
 	}
 
-	#title span {
-		display: none;
+	#login
+
+	#menu input {
+		background-color: hsla(30, 22%, 93%);
 	}
 
 	#pegasus {
@@ -143,6 +164,10 @@ body {
 		padding-left: 30px;
 		padding-right: 30px;
 		border-radius: 300px;
+	}
+
+	#footer {
+		padding-bottom: 20px;
 	}
 
 	#bg {
