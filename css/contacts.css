@@ -3,7 +3,7 @@
 
 #layout {
 	display: grid; 
-  	grid-template-columns:  1fr; 
+  	grid-template-columns: 1fr; 
   	grid-template-rows: .1fr .9fr .1fr; 
   	gap: 0px 0px; 
   	grid-template-areas: 
@@ -34,6 +34,17 @@ button:hover {
 	color: white;
 }
 
+input {
+    margin: 3px;
+	height: 40px;
+	width: 250px;
+	margin-left: 5px;
+	padding-right: 0;
+	font-size: .8em;
+	border-radius: 5px;
+	border:1px solid hsla(252, 6%, 8%, 0.37);
+}
+
 #header {
     display: flex;
     grid-area: header;
@@ -50,17 +61,6 @@ button:hover {
 #header div {
     display: flex;
     align-items: center;
-}
-
-#header input {
-    margin: 3px;
-	height: 40px;
-	width: 250px;
-	margin-left: 5px;
-	padding-right: 0;
-	font-size: .8em;
-	border-radius: 5px;
-	border:1px solid hsla(252, 6%, 8%, 0.37);
 }
 
 #contactCount {
@@ -87,7 +87,7 @@ button:hover {
     color: var(--color-accent-light);
     background-color: hsla(239, 45%, 60%, .7);
     text-transform: uppercase;
-    padding-left: 77px;
+    padding-left: 110px;
 }
 
 /* "<element> > *" is used to recurisvly assign the following styling to the
@@ -99,33 +99,69 @@ button:hover {
 #table-header th, #table-content td {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 10px;
+}
+
+.selected {
+    background-color: hsla(252, 6%, 45%, 0.4) !important;
+}
+
+#table-content input {
+    margin: 0;
 }
 
 #table-content {
-    padding-left: 77px;
+    padding-left: 100px;
     border-left: 2px solid hsla(252, 6%, 8%, 0.3);
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-#table-content td {
-    font-size: 14px;
+#table-content table tr {
+    background-color: hsla(252, 6%, 45%, 0.1);
 }
 
 #table-content tr:hover {
     background-color: hsla(30, 22%, 93%, 0.2);
 }
 
+#table-content td {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+#actions {
+    display: none;
+}
+
+#table-content input {
+    height: 27px;
+}
+
 #footer {
     background-color: hsla(239, 45%, 60%, 1);
     color: hsl(30, 22%, 93%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.disabled {
+    opacity: .5;
+}
+
+.disabled:hover {
+    background-color: inherit;
+    color: inherit;
+}
+
+#logout {
+    opacity: 1 !important;
 }
 
 #logout:hover {
-    background-color: hsl(0, 78%, 55%);
+    background-color: hsl(0, 70%, 55%) !important;
 }
 
 #createContact:hover {
-    background-color: hsl(214, 78%, 55%);
+    background-color: hsl(214, 70%, 55%);
 }

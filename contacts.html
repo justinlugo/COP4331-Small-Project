@@ -15,8 +15,8 @@
 					<span id="contactCount">Contacts</span>
 				</div>
 				<div id="search">
-					<input id="searchBar" placeholder="Search">
 					<button type="button" id="createContact">Add Contact</button>
+					<input id="searchBar" placeholder="Search">
 				</div>
 			</div>
 			<div id="main">
@@ -27,6 +27,7 @@
 							<th>Last</th>
 							<th>Email</th>
 							<th>Phone</th>
+							<th id="actions">Actions</th>
 						</tr>
 					</table>
 				</div>
@@ -34,8 +35,11 @@
 					<table></table>
 				</div>
 			</div>
-			<div id="sidebar"></div>
 			<div id="footer">
+				<div>
+					<button type="button" class="editBtn disabled">Edit</button>
+					<button type="button" class="removeBtn disabled">Remove</button>
+				</div>
 				<button type="button" id="logout">Logout</button>
 			</div>
 		</div>

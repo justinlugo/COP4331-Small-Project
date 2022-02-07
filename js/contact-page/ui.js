@@ -1,8 +1,13 @@
 import * as contact from './contacts.js';
 import * as tableCreate from './tableCreate.js';
 
-const tableHeader = document.getElementById('table-header');
+const tableHeader  = document.getElementById('table-header');
 const tableContent = document.getElementById('table-content');
+const footer       = document.getElementById('footer'); 
+
+// When select an element on the table, we will save that row here.
+let currentSelection;
+
 const emptyJSON = {
     "FirstName": "First Name",
     "LastName": "Last Name",
@@ -64,7 +69,6 @@ function convertCells_toInputs(array) {
 // Takes in the array of the row we confirmed on, and then returns an object
 // of the new data to update with.
 function confirmInput(array) {
-    // TODO: Find away to grab current row userID?
     const inputPackage = {
         firstName:  '',
         lastName:   '',
@@ -73,20 +77,13 @@ function confirmInput(array) {
         contactId:  ''
     };
 
-
     let i = 0;
     for (const property in inputPackage) {
-        console.log(array[i]);
-        console.log(array[i].children[0]);
-
         if (property != 'contactId')
             inputPackage[property] = array[i].children[0].value;
-        
-        inputPackage[property] = array[i].children[0].textContent;
+
         i++;
     }
-
-    console.log(inputPackage);
 
     return inputPackage;
 }
@@ -105,7 +102,6 @@ function inputs_toCells(array) {
 // We can watch the entire document, and have a "switch" to check which one
 // was clicked.
 (function eventListeners() {
-
     document.addEventListener('input', (e) => {   
         // Every time there is an event using the search bar
         if (e.target.id == 'searchBar') {
@@ -129,34 +125,62 @@ function inputs_toCells(array) {
             contact.registerContact();
         }
         // Edit is clicked.
-        else if (e.target.className == 'editBtn') {
-            // Where the e'th edit button clicked, store the array of the row
+        else if (e.target.className == 'editBtn' || e.target.className == 'editBtn disabled') {
+            if (e.target.className == 'editBtn disabled')
+                return false;
             // where that button is contained.
-            const rowCells = Array.from(e.target.parentNode.parentNode.cells);
+            const rowCells = Array.from(currentSelection.cells);
             convertCells_toInputs(rowCells);
             
             // Convert the edit button into a "confirm button".
             e.target.className = "confirmBtn";
-            e.target.textContent = "C";
+            e.target.textContent = "Confirm";
         } 
         // Confirm is clicked.
         else if (e.target.className == 'confirmBtn') {
-            const rowInputs = Array.from(e.target.parentNode.parentNode.cells);
-            // TODO: This is where PHP magick happens, we need to find a way to
-            //       overwrite this data to the server.
+            const rowInputs = Array.from(currentSelection.cells);
             const packagedInput = confirmInput(rowInputs);
             console.log(packagedInput);
             
             inputs_toCells(rowInputs);
+
+            e.target.className = "editBtn";
+            e.target.textContent = "Edit";
         }
         // Remove Contact is clicked.
-        else if (e.target.className == 'removeBtn') {
+        else if (e.target.className == 'removeBtn' || e.target.className == 'removeBtn disabled') {
+            console.log('cliedadasd');
+            if (e.target.className == 'removeBtn disabled') return false;
             const table = tableContent.getElementsByTagName('table')[0];
-            const trashRow = e.target.parentNode.parentNode;
+            const trashRow = currentSelection;
 
             table.removeChild(trashRow);
             // TODO: This is where PHP magick happens,
             //       Delete user from the database.
+        }
+        // Mega spaghetti code.
+        else if (e.target.nodeName == 'TD' && e.target.parentNode.parentNode.parentNode.id == 'table-content') {
+            const table = e.target.parentNode.parentNode;
+            // remove any previous selection
+            for (let i = 0; i < table.childElementCount; i++) {
+                if (table.childNodes[i].className = 'selected')
+                    table.childNodes[i].className = '';
+            }
+
+            // apply newly selected element.
+            const tr = e.target.parentNode;
+            tr.className = 'selected';
+
+            // make the action buttons active.
+            const actionButtonsList = document.querySelectorAll('.disabled');
+            for (let i = 0; i < actionButtonsList.length; i++) {
+                let className = actionButtonsList[i].className;
+                let newClass  = className.replace(" disabled", "");
+                // Remove disabled.
+                actionButtonsList[i].className = newClass;
+            }
+
+            currentSelection = e.target.parentNode;
         }
     });
 })();
