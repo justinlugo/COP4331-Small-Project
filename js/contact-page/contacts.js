@@ -24,7 +24,7 @@ function createNewContact(contact) {
 }
 
 // Cookie functions taken from Professor Leinecker's code.
-function readCookie()
+(function readCookie()
 {
 	userId = -1;
 	let data = document.cookie;
@@ -62,7 +62,7 @@ function readCookie()
   const greeting = document.createElement('span');
   greeting.textContent = `Hello, ${firstName} ${lastName}`;
   header.appendChild(greeting);
-}
+})();
 
 export function registerContact() {
   console.log("Hello")
@@ -230,65 +230,3 @@ logOutBtn.addEventListener('click', () => {
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 });
-
-// DEBUGGING FUNCTION
-(function() {
-  // Read the cookie if there is one
-  // readCookie();
-  
-  // JSON which contains an array of objects assigned as "contacts".
-  const myJSON = {
-      "contacts": [
-        {
-          "FirstName": "Justin",
-          "LastName": "Justin Last",
-          "email": "Justin@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Austin",
-          "LastName": "Austin Last",
-          "email": "Austin@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Sam",
-          "LastName": "Sam Last",
-          "email": "Sam@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Tyler",
-          "LastName": "Tyler Last",
-          "email": "Tyler@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Zach",
-          "LastName": "Zach Last",
-          "email": "Zach@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        },
-        {
-          "FirstName": "Victor",
-          "LastName": "Victor Last",
-          "email": "Victor@email.com",
-          "phone": "123-123-1234",
-          "id": 5
-        }
-      ]
-  };
-  // For loop of length of contacts, and for a given multiplyer, do that
-  // contact-length*n times. This helps to populate the table.
-  const multiplyer = 8;
-  for (let i = 0; i < multiplyer; i++) {
-      for(let j = 0; j < myJSON.contacts.length; j++)
-        createNewContact(myJSON.contacts[j]);
-  }
-})();
-// DEBUGGING FUNCTION
