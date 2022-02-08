@@ -1,5 +1,6 @@
 // anything dealing with the contact app (table of contacts for each user)
 import * as ui from './ui.js';
+import * as tableCreate from './tableCreate.js';
 
 // We can seperate js files into "components", very similar to Java with classes.
 const urlBase = "http://cop4331small.xyz/LAMPAPI";
@@ -18,61 +19,11 @@ let limit = 25;
 // Watches the height of main, and will dynamically set the height of the table.
 ui.heightObserver.observe(main);
 
-// Dynamiclly creates rows for each contact the user has created.
-function createRow(contact) {
-    const row = document.createElement('tr');
-
-    const firstName = document.createElement('td');
-    firstName.setAttribute('class', 'firstName');
-    firstName.textContent = contact.firstName;
-
-    const lastName = document.createElement('td');
-    lastName.setAttribute('class', 'lastName');
-    lastName.textContent = contact.lastName;
-
-    const email = document.createElement('td');
-    email.setAttribute('class', 'email');
-    email.textContent = contact.email;
-
-    const phone = document.createElement('td');
-    phone.setAttribute('class', 'phone');
-    phone.textContent = contact.phone;
-
-    const contactId = document.createElement('td');
-    contactId.setAttribute('class', 'contactId');
-    // contactId.style.display = none;
-    contactId.setAttribute('style', 'display:none');
-
-    const idSpan = document.createElement('span');
-    idSpan.textContent = contact.id;
-    contactId.appendChild(idSpan);
-
-    const edit = document.createElement('td');
-    edit.setAttribute('class', 'edit');
-    // Create edit button
-    const editBtn = document.createElement('button');
-    editBtn.setAttribute('class', 'editBtn');
-    editBtn.textContent = "E";
-    edit.appendChild(editBtn);
-
-    const remove = document.createElement('td');
-    remove.setAttribute('class', 'remove');
-    // Create Delete button
-    const removeBtn = document.createElement('button');
-    removeBtn.setAttribute('class', 'removeBtn');
-    removeBtn.textContent = "D";
-    remove.appendChild(removeBtn);
-
-    row.appendChild(firstName);
-    row.appendChild(lastName);
-    row.appendChild(email);
-    row.appendChild(phone);
-    row.appendChild(contactId);
-    row.appendChild(edit);
-    row.appendChild(remove);
-
-    const tableContent = document.getElementById("table-content").getElementsByTagName('table')[0];
-    tableContent.appendChild(row);
+//Dynamiclly creates rows for each contact the user has created.
+function createNewContact(contact) {
+  const row = tableCreate.newContact(contact);
+  const tableContent = document.getElementById("table-content").getElementsByTagName('table')[0];
+  tableContent.appendChild(row);
 }
 
 // (function() {
@@ -82,7 +33,12 @@ function createRow(contact) {
 
 // readCookie
 // Cookie functions taken from Professor Leinecker's code.
+<<<<<<< HEAD
 (function() {
+=======
+(function readCookie()
+{
+>>>>>>> balduins-edit
 	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
@@ -118,9 +74,16 @@ function createRow(contact) {
         greeting.textContent = `Hello, ${firstName} ${lastName}`;
         header.appendChild(greeting);
 
+<<<<<<< HEAD
         // Initial search when page loads to show user's database
         searchContacts();
 	}
+=======
+  // Create a greeting for the user.
+  const greeting = document.createElement('span');
+  greeting.textContent = `Hello, ${firstName} ${lastName}`;
+  header.appendChild(greeting);
+>>>>>>> balduins-edit
 })();
 
 export function registerContact() {
@@ -259,6 +222,7 @@ export function searchContacts() {
             {
                 let jsonObject = JSON.parse (xhr.responseText);
 
+<<<<<<< HEAD
                 // Show the received JSON for debugging
                 // document.getElementById("result").textContent = xhr.responseText;
                 
@@ -432,6 +396,28 @@ export function updateContact(rowElement) {
         // If there's an error display it
         // document.getElementById("result").textContent = err.message;
     }  
+=======
+              // Show the received JSON for debugging
+              // document.getElementById("result").textContent = xhr.responseText;
+              
+              // If no errors then adding of user was success
+              // if (jsonObject.error == "") {
+                  // Loop through the results and create rows
+                  // For loop of lenght of 'contacts' array inside JSON object
+                  for(let i = 0; i < jsonObject['contacts'].length; i++)
+                    createNewContact(jsonObject['contacts'][i]);
+              // }
+          }
+      };
+      // Send the JSON
+      xhr.send(myJSON);
+  }
+  catch(err)
+  {
+      // If there's an error display it
+      // document.getElementById("result").textContent = err.message;
+  }
+>>>>>>> balduins-edit
 }
 
 // When logout button is clicked.
@@ -442,4 +428,8 @@ logOutBtn.addEventListener('click', () => {
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> balduins-edit
