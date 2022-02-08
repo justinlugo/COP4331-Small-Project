@@ -1,28 +1,76 @@
 @import url('./styles.css');
-
 /* styling for the contacts page */
+
 #layout {
 	display: grid; 
-  	grid-template-columns: 1fr 90vw 1fr; 
-  	grid-template-rows: .1fr .8fr .1fr; 
+  	grid-template-columns: 1fr; 
+  	grid-template-rows: .1fr .9fr .1fr; 
   	gap: 0px 0px; 
   	grid-template-areas: 
-        ". header ."
-    	". main ."
-		". footer ."; 
+        "header"
+    	"main"
+		"footer"; 
 	height: 100vh;
     width: 100vw;
-	background-color: var(--color-accent-light);
+    background-color: hsla(252, 6%, 8%, 0.2);
 	color: var(--color-accent-dark);
 }
 
+button {
+    height: 45px;
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: 600;
+	color: var(--color-accent-light);
+	margin: 3px;
+	border-radius: 5px;
+	border:1px solid hsla(30, 22%, 93%, .75);
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+button:hover {
+    background-color: var(--color-accent-dark);
+	color: white;
+}
+
+input {
+    margin: 3px;
+	height: 40px;
+	width: 250px;
+	margin-left: 5px;
+	padding-right: 0;
+	font-size: .8em;
+	border-radius: 5px;
+	border:1px solid hsla(252, 6%, 8%, 0.37);
+}
+
 #header {
+    display: flex;
     grid-area: header;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#header div > * {
+    margin: 5px;
+}
+
+#header div {
+    display: flex;
+    align-items: center;
+}
+
+#contactCount {
+    font-size: 2.8em;
+    color: hsl(30, 22%, 93%);
 }
 
 #main { 
 	grid-area: main;
-	max-width: 90vw;
+	max-width: 100vw;
     /* forces main grid to remain in grid, without pushing on other grids as 
     overflow happens */
 	min-height: 0;
@@ -32,11 +80,14 @@
     width: 100%;
     /* prevents the text from jumbling and forming new lines inside cells */
     white-space: nowrap;
+    table-layout: fixed;
 }
 
 #table-header {
-    background-color: hsla(239, 29%, 54%);
+    color: var(--color-accent-light);
+    background-color: hsla(239, 45%, 60%, .7);
     text-transform: uppercase;
+    padding-left: 110px;
 }
 
 /* "<element> > *" is used to recurisvly assign the following styling to the
@@ -50,12 +101,67 @@
     padding-bottom: 10px;
 }
 
-#table-header th {
-    padding-left: 10px;
+.selected {
+    background-color: hsla(252, 6%, 45%, 0.4) !important;
+}
+
+#table-content input {
+    margin: 0;
 }
 
 #table-content {
-    overflow: auto;
+    padding-left: 100px;
+    border-left: 2px solid hsla(252, 6%, 8%, 0.3);
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+#table-content table tr {
+    background-color: hsla(252, 6%, 45%, 0.1);
+}
+
+#table-content tr:hover {
+    background-color: hsla(30, 22%, 93%, 0.2);
+}
+
+#table-content td {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+#actions {
+    display: none;
+}
+
+#table-content input {
+    height: 27px;
+}
+
+#footer {
+    background-color: hsla(239, 45%, 60%, 1);
+    color: hsl(30, 22%, 93%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.disabled {
+    opacity: .5;
+}
+
+.disabled:hover {
+    background-color: inherit;
+    color: inherit;
+}
+
+#logout {
+    opacity: 1 !important;
+}
+
+#logout:hover {
+    background-color: hsl(0, 70%, 55%) !important;
+}
+
+#createContact:hover {
+    background-color: hsl(214, 70%, 55%);
 }

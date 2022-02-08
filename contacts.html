@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>4331 System</title>
+		<title>CODEX</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/contacts.css">
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	</head>
 	<body>
 		<div id="layout">
 			<div id="header">
-				<button type="button" id="logout">Logout</button>
+				<div>
+					<span id="contactCount">Contacts</span>
+				</div>
+				<div id="search">
+					<button type="button" id="createContact">Add Contact</button>
+					<input id="searchBar" placeholder="Search">
+				</div>
 			</div>
 			<div id="main">
 				<div id="table-header">
-					<div id="search"><input id="searchBar" placeholder="Search"></div>
-					<button type="button" id="createContact">Add Contact</button>
 					<table>
 						<tr>
 							<th>First</th>
 							<th>Last</th>
 							<th>Email</th>
 							<th>Phone</th>
+							<th id="actions">Actions</th>
 						</tr>
 					</table>
 				</div>
@@ -31,8 +35,11 @@
 				</div>
 			</div>
 			<div id="footer">
-				<span class="info">What's this?</span>
-				<a href="https://www.cs.ucf.edu/">UCF 2022</a>
+				<div>
+					<button type="button" class="editBtn disabled">Edit</button>
+					<button type="button" class="removeBtn disabled">Remove</button>
+				</div>
+				<button type="button" id="logout">Logout</button>
 			</div>
 		</div>
 	</body>
