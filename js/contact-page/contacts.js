@@ -33,12 +33,7 @@ function createNewContact(contact) {
 
 // readCookie
 // Cookie functions taken from Professor Leinecker's code.
-<<<<<<< HEAD
 (function() {
-=======
-(function readCookie()
-{
->>>>>>> balduins-edit
 	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
@@ -74,16 +69,9 @@ function createNewContact(contact) {
         greeting.textContent = `Hello, ${firstName} ${lastName}`;
         header.appendChild(greeting);
 
-<<<<<<< HEAD
         // Initial search when page loads to show user's database
         searchContacts();
 	}
-=======
-  // Create a greeting for the user.
-  const greeting = document.createElement('span');
-  greeting.textContent = `Hello, ${firstName} ${lastName}`;
-  header.appendChild(greeting);
->>>>>>> balduins-edit
 })();
 
 export function registerContact() {
@@ -222,7 +210,6 @@ export function searchContacts() {
             {
                 let jsonObject = JSON.parse (xhr.responseText);
 
-<<<<<<< HEAD
                 // Show the received JSON for debugging
                 // document.getElementById("result").textContent = xhr.responseText;
                 
@@ -245,7 +232,7 @@ export function searchContacts() {
                 for (let i = 0; i < showSize; i++) 
                 {
                     updateTable(jsonObject['contacts'][i]);
-                    // createRow(jsonObject['contacts'][i]);
+                    // createNewContact(jsonObject['contacts'][i]);
                 }
             }
         };
@@ -268,7 +255,7 @@ function updateTable(contactJSON) {
     // If theres nothing in the table then add the contact
     if (tableLength == 0) 
     {
-        createRow(contactJSON);
+        createNewContact(contactJSON);
         return;
     }
 
@@ -294,7 +281,7 @@ function updateTable(contactJSON) {
     }
 
     // After checking the contact is not in the table then add to table
-    createRow(contactJSON);
+    createNewContact(contactJSON);
 }
 
 // Function to clear the table
@@ -396,28 +383,6 @@ export function updateContact(rowElement) {
         // If there's an error display it
         // document.getElementById("result").textContent = err.message;
     }  
-=======
-              // Show the received JSON for debugging
-              // document.getElementById("result").textContent = xhr.responseText;
-              
-              // If no errors then adding of user was success
-              // if (jsonObject.error == "") {
-                  // Loop through the results and create rows
-                  // For loop of lenght of 'contacts' array inside JSON object
-                  for(let i = 0; i < jsonObject['contacts'].length; i++)
-                    createNewContact(jsonObject['contacts'][i]);
-              // }
-          }
-      };
-      // Send the JSON
-      xhr.send(myJSON);
-  }
-  catch(err)
-  {
-      // If there's an error display it
-      // document.getElementById("result").textContent = err.message;
-  }
->>>>>>> balduins-edit
 }
 
 // When logout button is clicked.
@@ -428,8 +393,4 @@ logOutBtn.addEventListener('click', () => {
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> balduins-edit
