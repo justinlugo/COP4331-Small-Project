@@ -119,8 +119,18 @@ document.addEventListener('click', (e) => {
             // Check if any entry field is empty and stop the submission and let the user know
             if (value == "") {
                 result.textContent = `${key} is empty`;
-                console.log(`${key}:is empty`);
+                // console.log(`${key}:is empty`);
                 return;
+            }
+
+            // Checks if email is valid
+            if (data[key] == data['email'])
+            {
+                if (!data['email'].match(/(.+)@((.+){2,})\.((.+){2,})/))
+                {
+                    result.textContent = `Please enter a valid email`;
+                    return;
+                }
             }
         }
 
@@ -151,11 +161,10 @@ document.addEventListener('click', (e) => {
             // Check if any entry field is empty and stop the submission and let the user know
             if (value == "") {
                 result.textContent = `${key} is empty`;
-                console.log(`${key}:is empty`);
+                // console.log(`${key}:is empty`);
                 return;
             }
         }
-
         // This section: pulls plaintext password, hashes it, and replaces it in object
         // Comment this to not hash passwords
         data["password"] = md5(data["password"]);

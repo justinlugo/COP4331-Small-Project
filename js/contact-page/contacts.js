@@ -82,6 +82,12 @@ export function registerContact() {
     console.log(rowData);
     // Convert the row to an object
     const data = rowToObject(rowData);
+    if (!data)
+    {
+        console.log("error");
+        return;
+    }
+
     console.log(data);
     // Convert the data to JSON
     const myJSON = JSON.stringify(data);
@@ -136,6 +142,14 @@ function rowToObject(element) {
     newContact.email = element.cells[2].children[0].value;
     newContact.phone = element.cells[3].children[0].value;
 
+
+    let result = element.querySelector('#result');
+    if (result != null) result.remove();
+
+    // Create a span for the result
+    result = document.createElement('span');
+    result.setAttribute('id', 'result');
+
     // Loop through the newContact object and check to make sure the value are not empty
     for(const [key, value] of Object.entries(newContact)) 
     {
@@ -144,9 +158,34 @@ function rowToObject(element) {
         // Check if any entry field is empty and stop the submission and let the user know
         if (value == "") 
         {
-            // result.textContent = `${key} is empty`;
+            result.textContent = `${key} is empty`;
             console.log(`${key}:is empty`);
-            return;
+            element.cells[4].appendChild(result);
+            return 0;
+        }
+
+        // Checks if email is valid
+        if (newContact[key] == newContact['email'])
+        {
+            if (!newContact['email'].match(/(.+)@((.+){2,})\.((.+){2,})/))
+            {
+                console.log("Please enter a valid email");
+                result.textContent = `Please enter a valid email`;
+                element.cells[4].appendChild(result);
+                return 0;
+            }
+        }
+
+        // Checks the phone field
+        if (newContact[key] == newContact['phone'])
+        {
+            if (!newContact['phone'].match(/^\d{3}-?\d{3}-?\d{4}$/))
+            {
+                console.log("Please enter phone as ###-###-####");
+                result.textContent = `Please enter phone as ###-###-####`;    
+                element.cells[4].appendChild(result);
+                return 0;
+            }
         }
     }
 
@@ -215,21 +254,21 @@ export function searchContacts() {
                 
                 // Check the length of the received objects and loop through a max of the limit
                 // Sets the size of the loop to create rows
-                let showSize = 0;
-                if (jsonObject.hasOwnProperty('contacts'))
-                {
-                    if (jsonObject['contacts'].length  < limit)
-                    {
-                    showSize = jsonObject['contacts'].length;
-                    }
-                    else 
-                    {
-                    showSize = limit;
-                    }
-                }
+                // let showSize = 0;
+                // if (jsonObject.hasOwnProperty('contacts'))
+                // {
+                //     if (jsonObject['contacts'].length  < limit)
+                //     {
+                //     showSize = jsonObject['contacts'].length;
+                //     }
+                //     else 
+                //     {
+                //     showSize = limit;
+                //     }
+                // }
 
                 // For loop of lenght of 'contacts' array inside JSON object
-                for (let i = 0; i < showSize; i++) 
+                for (let i = 0; i < jsonObject['contacts'].length; i++) 
                 {
                     updateTable(jsonObject['contacts'][i]);
                     // createNewContact(jsonObject['contacts'][i]);
@@ -290,12 +329,28 @@ function clearTable() {
     const table = document.getElementById("table-content").children;
     const tableLength = table[0].children.length;
 
-    // Loop through the table
-    for (let i = 0; i < tableLength; i++) 
+    const inputRow = document.getElementById("rowInput");
+    if (inputRow == undefined)
     {
-        // Delete the top row as many times as in the table
-        const row = table[0].rows[0];
-        row.remove();
+        console.log("no input row");
+        // Loop through the table
+        for (let i = 0; i < tableLength; i++) 
+        {
+            // Delete the top row as many times as in the table
+            const row = table[0].rows[0];
+            row.remove();
+        }
+    }
+    else
+    {
+        console.log("yes input row");
+        // Loop through the table
+        for (let i = 1; i < tableLength; i++) 
+        {
+            // Delete the top row as many times as in the table
+            const row = table[0].rows[0];
+            row.remove();
+        }
     }
 }
 

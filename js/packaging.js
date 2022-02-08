@@ -11,7 +11,6 @@ let lastName = "";
 export const newUser = (data) => {
     // packaging the data from the form.
     const myJSON = JSON.stringify(data);
-    console.log(myJSON);
 
     //Attempt to login and check if the user already has an account
     // Register a new user
@@ -32,7 +31,7 @@ export const newUser = (data) => {
                 let jsonObject = JSON.parse(xhr.responseText);
                 
                 // Show the received JSON for debugging
-                document.getElementById("result").textContent = xhr.responseText;
+                // document.getElementById("result").textContent = xhr.responseText;
                 
                 // Check if username is already in the database 
                 if (jsonObject.error == "login already in use")
@@ -60,14 +59,11 @@ export const newUser = (data) => {
     {
         document.getElementById("result").textContent = err.message;
     }
-    
-    console.log("New user submitted.");
 }
 
 // Function for loggin in as an existing user
 export const login = (data) => {
     const myJSON = JSON.stringify(data);
-    console.log(myJSON);
 
     // HTTP post for sending JSON login info.
     userId = 0;
@@ -87,7 +83,7 @@ export const login = (data) => {
                 let jsonObject = JSON.parse (xhr.responseText);
 
                 // Show the received JSON for debugging
-                document.getElementById("result").textContent = xhr.responseText;
+                // document.getElementById("result").textContent = xhr.responseText;
                 
                 // Saves the users ID
                 userId = jsonObject.id;
@@ -114,8 +110,6 @@ export const login = (data) => {
     {
         document.getElementById("result").textContent = err.message;
     }
-
-    console.log("Login attempt.");
 }
 
 function saveCookie()

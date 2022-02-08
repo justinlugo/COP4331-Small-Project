@@ -9,8 +9,8 @@ const footer       = document.getElementById('footer');
 let currentSelection;
 
 const emptyJSON = {
-    "FirstName": "First Name",
-    "LastName": "Last Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "email": "Email",
     "phone": "Phone Number"
 };
@@ -149,13 +149,12 @@ function inputs_toCells(array) {
             inputs_toCells(rowInputs);
 
             // Send the edited contact to the database
-            const tableRow = e.target.parentNode.parentNode;
-            console.log(tableRow);
-            contact.updateContact(tableRow);
+            contact.updateContact(currentSelection);
 
+            console.log("Convert confirm to edit");
             // Convert the confirm button into a "edit button".
             e.target.className = "editBtn";
-            e.target.textContent = "E";
+            e.target.textContent = "Edit";
         }
         // Remove Contact is clicked.
         else if (e.target.className == 'removeBtn' || e.target.className == 'removeBtn disabled') {
@@ -176,6 +175,11 @@ function inputs_toCells(array) {
             {
                 // No
             }
+            for (i = 0; i < 2; i++)
+            {
+                actionButtonsList[i].className += ' disabled';
+            }
+
         }
         // Mega spaghetti code.
         else if (e.target.nodeName == 'TD' && e.target.parentNode.parentNode.parentNode.id == 'table-content') {
@@ -191,7 +195,6 @@ function inputs_toCells(array) {
             tr.className = 'selected';
 
             // make the action buttons active.
-            const actionButtonsList = document.querySelectorAll('.disabled');
             for (let i = 0; i < actionButtonsList.length; i++) {
                 let className = actionButtonsList[i].className;
                 let newClass  = className.replace(" disabled", "");
@@ -203,6 +206,8 @@ function inputs_toCells(array) {
         }
     });
 })();
+
+const actionButtonsList = document.querySelectorAll('.disabled');
 
 // Object of variables or functions to package to be used across the application.
 export { heightObserver, setTableHeight }
